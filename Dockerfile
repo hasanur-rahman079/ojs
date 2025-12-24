@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libicu-dev \
     libonig-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
     curl \
     git \
     unzip \
