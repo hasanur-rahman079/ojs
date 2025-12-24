@@ -50,6 +50,9 @@ WORKDIR /var/www/html
 # Copy application source
 COPY . .
 
+# Ensure config.inc.php exists (it's ignored by Git)
+RUN if [ ! -f config.inc.php ]; then cp config.TEMPLATE.inc.php config.inc.php; fi
+
 # Fetch Git Submodules (Crucial for lib/pkp and plugins)
 RUN git config --global --add safe.directory /var/www/html \
     && git submodule update --init --recursive
@@ -64,6 +67,7 @@ RUN composer -d lib/pkp install --no-dev --optimize-autoloader
 RUN mkdir -p /var/www/ojs-files
 
 # Set permissions for the entire web root and files directory
+# We make config.inc.php writable for the installer
 RUN chown -R www-data:www-data /var/www/html /var/www/ojs-files \
     && chmod -R 775 /var/www/html /var/www/ojs-files
 

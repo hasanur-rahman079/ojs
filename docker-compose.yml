@@ -15,7 +15,6 @@ services:
     volumes:
       - ojs_public:/var/www/html/public
       - ojs_private:/var/www/ojs-files
-      - ojs_plugins:/var/www/html/plugins
     depends_on:
       - db
 
