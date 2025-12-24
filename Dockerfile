@@ -33,6 +33,10 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     gettext \
     session
 
+# Install Node.js (Required for OJS 3.5 Assets)
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs
+
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
@@ -45,17 +49,21 @@ WORKDIR /var/www/html
 # Copy application source
 COPY . .
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html
+# Fetch Git Submodules (Crucial for lib/pkp and plugins)
+RUN git submodule update --init --recursive
+
+# Install Node dependencies and build assets
+RUN npm install && npm run build
 
 # Install PHP dependencies
 RUN composer -d lib/pkp install --no-dev --optimize-autoloader
 
 # Create OJS Files Directory (outside web root)
-RUN mkdir -p /var/www/ojs-files \
-    && chown -R www-data:www-data /var/www/ojs-files \
-    && chmod -R 775 /var/www/ojs-files
+RUN mkdir -p /var/www/ojs-files
+
+# Set permissions for the entire web root and files directory
+RUN chown -R www-data:www-data /var/www/html /var/www/ojs-files \
+    && chmod -R 775 /var/www/html /var/www/ojs-files
 
 # Apache Configuration for OJS
 RUN echo "<Directory /var/www/html>\n\
@@ -64,6 +72,5 @@ RUN echo "<Directory /var/www/html>\n\
     </Directory>" > /etc/apache2/conf-available/ojs.conf \
     && a2enconf ojs
 
-# Entrypoint setup if needed, but for now we'll use default apache2-foreground
 EXPOSE 80
 CMD ["apache2-foreground"]
