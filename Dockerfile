@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libcurl4-openssl-dev \
     libssl-dev \
+    libpq-dev \
+    postgresql-client \
     curl \
     git \
     unzip \
@@ -22,6 +24,8 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
     mysqli \
     pdo_mysql \
+    pdo_pgsql \
+    pgsql \
     gd \
     intl \
     mbstring \
@@ -31,7 +35,6 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     curl \
     fileinfo \
     gettext \
-    session \
     ftp
 
 # Install Node.js (Required for OJS 3.5 Assets)
