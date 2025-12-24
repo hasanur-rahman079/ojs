@@ -5,6 +5,23 @@ services:
     restart: always
     ports:
       - "8081:80"
+    environment:
+      # Map variables from Dokploy UI to the container
+      - OJS_BASE_URL
+      - OJS_DB_DRIVER
+      - OJS_DB_HOST
+      - OJS_DB_PORT
+      - OJS_DB_USER
+      - OJS_DB_PASSWORD
+      - OJS_DB_NAME
+      # Also map any PKP_CONF variables for advanced config
+      - PKP_CONF_GENERAL_BASE_URL
+      - PKP_CONF_DATABASE_DRIVER
+      - PKP_CONF_DATABASE_HOST
+      - PKP_CONF_DATABASE_PORT
+      - PKP_CONF_DATABASE_USERNAME
+      - PKP_CONF_DATABASE_PASSWORD
+      - PKP_CONF_DATABASE_NAME
     volumes:
       - ojs_public:/var/www/html/public
       - ojs_private:/var/www/ojs-files
