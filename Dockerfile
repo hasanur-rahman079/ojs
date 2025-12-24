@@ -50,8 +50,14 @@ WORKDIR /var/www/html
 # Copy application source
 COPY . .
 
-# Ensure config.inc.php exists (it's ignored by Git)
-RUN if [ ! -f config.inc.php ]; then cp config.TEMPLATE.inc.php config.inc.php; fi
+# Ensure config.inc.php exists and pre-configure it for SSL/Proxies
+RUN if [ ! -f config.inc.php ]; then cp config.TEMPLATE.inc.php config.inc.php; fi \
+    && sed -i 's/installed = Off/installed = Off/' config.inc.php \
+    && sed -i 's/base_url = "http:\/\/localhost"/base_url = "https:\/\/my.ems.pub"/' config.inc.php \
+    && sed -i 's/trust_x_forwarded_for = Off/trust_x_forwarded_for = On/' config.inc.php \
+    && sed -i 's/force_ssl = Off/force_ssl = On/' config.inc.php \
+    && sed -i 's/force_login_ssl = Off/force_login_ssl = On/' config.inc.php \
+    && sed -i 's/connection_strip_path = Off/connection_strip_path = On/' config.inc.php
 
 # Fetch Git Submodules (Crucial for lib/pkp and plugins)
 RUN git config --global --add safe.directory /var/www/html \
@@ -60,14 +66,14 @@ RUN git config --global --add safe.directory /var/www/html \
 # Install Node dependencies and build assets
 RUN npm install && npm run build
 
-# Install PHP dependencies
-RUN composer -d lib/pkp install --no-dev --optimize-autoloader
+# Install PHP dependencies (Core and Plugins)
+RUN composer -d lib/pkp install --no-dev --optimize-autoloader \
+    && find plugins -name composer.json -exec composer install --no-dev -d $(dirname {}) \;
 
 # Create OJS Files Directory (outside web root)
 RUN mkdir -p /var/www/ojs-files
 
 # Set permissions for the entire web root and files directory
-# We make config.inc.php writable for the installer
 RUN chown -R www-data:www-data /var/www/html /var/www/ojs-files \
     && chmod -R 775 /var/www/html /var/www/ojs-files
 
