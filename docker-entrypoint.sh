@@ -25,8 +25,7 @@ set_config "general" "trust_x_forwarded_for" "On"
 set_config "security" "force_ssl" "On"
 set_config "security" "force_login_ssl" "On"
 
-# 2. Database Mapping (Standardized names)
-# NOTE: OJS doesn't want quotes around passwords in the config file
+# 2. Database Mapping
 set_config "database" "driver" "${OJS_DB_DRIVER:-postgres}"
 set_config "database" "host" "${OJS_DB_HOST}"
 set_config "database" "port" "${OJS_DB_PORT:-5432}"
@@ -34,7 +33,10 @@ set_config "database" "username" "${OJS_DB_USER}"
 set_config "database" "password" "${OJS_DB_PASSWORD}"
 set_config "database" "name" "${OJS_DB_NAME}"
 
-# 3. Handle PKP_CONF_ style variables
+# 3. Files Mapping
+set_config "files" "files_dir" "/var/www/ojs-files"
+
+# 4. Handle PKP_CONF_ style variables
 for var in $(env | grep "^PKP_CONF_"); do
     config_pair=${var#PKP_CONF_}
     config_key_full=${config_pair%%=*}
@@ -46,14 +48,14 @@ for var in $(env | grep "^PKP_CONF_"); do
     set_config "$section" "$key" "$config_value"
 done
 
-# 4. Generate APP_KEY if it's empty
+# 5. Generate APP_KEY if it's empty
 if [ -z "$(grep "app_key =" config.inc.php | cut -d'=' -f2 | xargs)" ]; then
     APP_KEY=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32)
     echo "Generated new app_key"
     sed -i "s/app_key =.*/app_key = $APP_KEY/" config.inc.php
 fi
 
-# 5. Fix permissions for runtime
+# 6. Fix permissions for runtime
 chown -R www-data:www-data /var/www/html /var/www/ojs-files public/ plugins/ cache/
 chmod -R 775 /var/www/html /var/www/ojs-files public/ plugins/ cache/
 
