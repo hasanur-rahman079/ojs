@@ -53,18 +53,9 @@ WORKDIR /var/www/html
 # Copy application source
 COPY . .
 
-# Ensure config.inc.php exists and pre-configure it for SSL/Proxies
-# We explicitly set restful_urls = Off to ensure the installer and site work correctly behind proxies initially
-RUN if [ ! -f config.inc.php ]; then cp config.TEMPLATE.inc.php config.inc.php; fi \
-    && sed -i 's|base_url = ".*"|base_url = "https://my.ems.pub"|' config.inc.php \
-    && sed -i 's/restful_urls = On/restful_urls = Off/' config.inc.php \
-    && sed -i 's/trust_x_forwarded_for = Off/trust_x_forwarded_for = On/' config.inc.php \
-    && sed -i 's/force_ssl = Off/force_ssl = On/' config.inc.php \
-    && sed -i 's/force_login_ssl = Off/force_login_ssl = On/' config.inc.php \
-    && if [ -z "$(grep "app_key =" config.inc.php | cut -d'=' -f2 | xargs)" ]; then \
-    APP_KEY=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32); \
-    sed -i "s/app_key =.*/app_key = $APP_KEY/" config.inc.php; \
-    fi
+# Copy and set up the runtime entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Fetch Git Submodules (Crucial for lib/pkp and plugins)
 RUN git config --global --add safe.directory /var/www/html \
@@ -96,4 +87,5 @@ RUN echo "<Directory /var/www/html>\n\
     && a2enconf ojs
 
 EXPOSE 80
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
