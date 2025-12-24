@@ -76,12 +76,10 @@ RUN composer -d lib/pkp install --no-dev --optimize-autoloader \
     composer install --no-dev -d $d --no-interaction --optimize-autoloader; \
     done
 
-# Create OJS Files Directory (outside web root)
-RUN mkdir -p /var/www/ojs-files
-
-# Set permissions for the entire web root and files directory
-# OJS 3.5 needs public/ and plugins/ to be writable for some asset processes
-RUN chown -R www-data:www-data /var/www/html /var/www/ojs-files \
+# Create necessary directories and set permissions
+RUN mkdir -p /var/www/ojs-files \
+    && mkdir -p cache/t_cache cache/t_compile cache/t_config cache/_db \
+    && chown -R www-data:www-data /var/www/html /var/www/ojs-files \
     && chmod -R 775 /var/www/html /var/www/ojs-files
 
 # Apache Configuration for OJS
