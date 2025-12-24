@@ -616,6 +616,8 @@ describe('Data suite tests', function() {
         cy.get('[data-cy="reviewer-suggestion-manager"]')
             .find('div:contains("'+suggestions[2].fullname+'")')
             .should('have.length', 0);
+
+        cy.logout();
     });
 
     it('Enroll an existing user who match with a suggested revirwer', function () {
@@ -653,6 +655,8 @@ describe('Data suite tests', function() {
         cy.get('[data-cy="reviewer-suggestion-manager"]')
             .find('div:contains("'+suggestions[7].fullname+'")')
             .should('have.length', 0);    
+
+        cy.logout();
     });
 
     it('Add Reviewer from pre existing list that match a suggested reviewer', function () {
@@ -680,6 +684,7 @@ describe('Data suite tests', function() {
 
         cy.get('[data-cy="reviewer-manager"]').contains(suggestions[8].fullname);
         cy.get('[data-cy="reviewer-suggestion-manager"]').should('not.exist');
+        cy.logout();
     });
 
     after(function() {
