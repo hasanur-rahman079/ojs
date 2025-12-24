@@ -1,0 +1,38 @@
+services:
+  ojs:
+    build: .
+    container_name: ojs-app
+    restart: always
+    ports:
+      - "8081:80"
+    extra_hosts:
+      - "my.ems.pub:127.0.0.1"
+    environment:
+      - OJS_DB_HOST=db
+      - OJS_DB_USER=${OJS_DB_USER}
+      - OJS_DB_PASSWORD=${OJS_DB_PASSWORD}
+      - OJS_DB_NAME=ojs_db
+    volumes:
+      - ojs_public:/var/www/html/public
+      - ojs_private:/var/www/ojs-files
+      - ojs_plugins:/var/www/html/plugins
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.11
+    container_name: ojs-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${OJS_DB_PASSWORD}
+      - MYSQL_DATABASE=ojs_db
+      - MYSQL_USER=${OJS_DB_USER}
+      - MYSQL_PASSWORD=${OJS_DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  ojs_public:
+  ojs_private:
+  ojs_plugins:
+  db_data:

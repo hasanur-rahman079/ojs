@@ -1,0 +1,306 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-26 09:30+0000\n"
+"PO-Revision-Date: 2021-04-26 09:30+0000\n"
+"Last-Translator: Primož Svetek <primoz.svetek@gmail.com>\n"
+"Language-Team: English (United States) <http://translate.pkp.sfu.ca/projects/"
+"plugins/openid/en_US/>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.9.1\n"
+
+# general messages
+msgid "plugins.generic.openid.name"
+msgstr "OpenID Authentication Plugin"
+
+msgid "plugins.generic.openid.description"
+msgstr "This plugin allows users to register and login with an OpenID providers such as Keycloak."
+
+# step2 messages
+msgid "plugins.generic.openid.step2.title"
+msgstr "Complete registration"
+
+msgid "plugins.generic.openid.step2.headline"
+msgstr "Do you already have an account with {$journalName}?"
+
+msgid "plugins.generic.openid.step2.help"
+msgstr "Additional information is required to register to {$journalName}:"
+
+msgid "plugins.generic.openid.step2.choice.no"
+msgstr "No, I'm new to {$journalName}."
+
+msgid "plugins.generic.openid.step2.choice.yes"
+msgstr "Yes, I already have an account."
+
+msgid "plugins.generic.openid.step2.complete"
+msgstr "Please verify your details and add any missing information"
+
+msgid "plugins.generic.openid.step2.complete.btn"
+msgstr "Complete registration"
+
+msgid "plugins.generic.openid.step2.connect"
+msgstr "Please login to your account at {$journalName}.<br />Your information will be updated automatically."
+
+msgid "plugins.generic.openid.step2.connect.username"
+msgstr "Username or email"
+
+msgid "plugins.generic.openid.step2.connect.btn"
+msgstr "Login and connect accounts"
+
+#step 2 form error messages
+msgid "plugins.generic.openid.form.error.username.required"
+msgstr "A username is required."
+
+msgid "plugins.generic.openid.form.error.usernameExists"
+msgstr "The username you provided already exists."
+
+msgid "plugins.generic.openid.form.error.givenName.required"
+msgstr "A given name is required."
+
+msgid "plugins.generic.openid.form.error.familyName.required"
+msgstr "A family name is required."
+
+msgid "plugins.generic.openid.form.error.country.required"
+msgstr "A country is required."
+
+msgid "plugins.generic.openid.form.error.affiliation.required"
+msgstr "An affiliation is required."
+
+msgid "plugins.generic.openid.form.error.email.required"
+msgstr "An email is required."
+
+msgid "plugins.generic.openid.form.error.emailExists"
+msgstr "The email address you provided already exists. Please try to log in to the existing account."
+
+msgid "plugins.generic.openid.form.error.privacyConsent.required"
+msgstr "You must agree to the terms of the privacy statement."
+
+msgid "plugins.generic.openid.form.error.usernameOrEmail.required"
+msgstr "A username or email is required."
+
+msgid "plugins.generic.openid.form.error.password.required"
+msgstr "A password is required."
+
+msgid "plugins.generic.openid.form.error.user.not.found"
+msgstr "No user was found that matches your credentials."
+
+msgid "plugins.generic.openid.form.error.invalid.credentials"
+msgstr "The password is incorrect."
+
+msgid "plugins.generic.openid.settings.error"
+msgstr "<strong>Incorrect OpenID plugin configuration!</strong><br />There is no OpenID Provider configured!<br />Please report this to your technical support."
+
+# settings messages
+msgid "plugins.generic.openid.settings.openid.head"
+msgstr "OpenId Provider:"
+
+msgid "plugins.generic.openid.settings.openid.desc"
+msgstr "Please enter the following information according to your OpenID provider."
+
+msgid "plugins.generic.openid.settings.custom.enable"
+msgstr "Custom OpenID Provider"
+
+msgid "plugins.generic.openid.settings.custom.desc"
+msgstr "If you want to use a custom OpenID Connect Provider (e.g. a self-hosted Keycloak server), you have to provide the URL to the OpenID configuration endpoint and the client credentials."
+
+msgid "plugins.generic.openid.settings.btn.settings"
+msgstr "Custom login button settings"
+
+msgid "plugins.generic.openid.settings.provider.settings"
+msgstr "Login credentials"
+
+msgid "plugins.generic.openid.settings.btnImg.desc"
+msgstr "Please enter a URL to an image (46x41) to be displayed on the login button. If no image is provided, the OpenID logo will be shown."
+
+msgid "plugins.generic.openid.settings.btnTxt.desc"
+msgstr "Please enter the label of the login button."
+
+msgid "plugins.generic.openid.settings.orcid.enable"
+msgstr "ORCID OpenID Connect"
+
+msgid "plugins.generic.openid.settings.orcid.desc"
+msgstr "Please use this redirect URL (see <a href='https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/ORCID_AUTH_WITH_OPENID_CONNECT.md' target='_blank' rel='noopener'>tutorial</a>):"
+
+msgid "plugins.generic.openid.settings.google.enable"
+msgstr "Google OpenID Connect"
+
+msgid "plugins.generic.openid.settings.google.desc"
+msgstr "You have to to create an OpenID Connect client in the <a href='https://console.developers.google.com/apis/credentials' target='_blank' rel='noopener'>Google Developer Console</a> to use Google as an OpenID Connect provider. See this <a href='https://developers.google.com/identity/protocols/oauth2/openid-connect' target='_blank' rel='noopener'>tutorial</a>. Please use this redirect URL:"
+
+msgid "plugins.generic.openid.settings.microsoft.enable"
+msgstr "Microsoft Azure Active Directory"
+
+msgid "plugins.generic.openid.settings.microsoft.desc"
+msgstr "You have to to configure your App Service in the <a href='https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview' target='_blank' rel='noopener'>Azure portal</a> (go to 'App registrations' after login) to use Azure AD login. See this <a href='https://docs.microsoft.com/en-us/azure/app-service/configure-authentication-provider-aad' target='_blank' rel='noopener'>tutorial</a>. Please use this redirect URL:"
+
+msgid "plugins.generic.openid.settings.apple.enable"
+msgstr "Apple ID"
+
+msgid "plugins.generic.openid.settings.apple.desc"
+msgstr "See this <a href='https://developer.apple.com/documentation/authenticationservices' target='_blank' rel='noopener'>tutorial</a> on how to configure Apple ID. Please use this redirect URL:"
+
+msgid "plugins.generic.openid.settings.configUrl"
+msgstr "OpenID Provider URL"
+
+msgid "plugins.generic.openid.settings.configUrl.desc"
+msgstr "Please enter the configuration URL of your OpenID provider.<strong>The URL must end with \".well-known/openid-configuration\" (e.g. \"https://sso.example.com/auth/realms/master/.well-known/openid-configuration\").</strong>"
+
+msgid "plugins.generic.openid.settings.clientId"
+msgstr "Client identifier"
+
+msgid "plugins.generic.openid.settings.clientId.desc"
+msgstr "Please enter your clientId."
+
+msgid "plugins.generic.openid.settings.clientSecret"
+msgstr "Client secret"
+
+msgid "plugins.generic.openid.settings.clientSecret.desc"
+msgstr "Please enter your client secret."
+
+msgid "plugins.generic.openid.settings.features.head"
+msgstr "Advanced plugin functions"
+
+msgid "plugins.generic.openid.settings.features.desc"
+msgstr ""
+"The following fields are optional. They are not required to connect to an "
+"OpenID provider."
+
+msgid "plugins.generic.openid.settings.legacyLogin"
+msgstr "Legacy Login"
+
+msgid "plugins.generic.openid.settings.legacyLogin.check"
+msgstr "Enable legacy login"
+
+msgid "plugins.generic.openid.settings.legacyLogin.desc"
+msgstr "Enable this option if you want users to be able to login with the application's login form in addition to the OpenID logon."
+
+msgid "plugins.generic.openid.settings.legacyRegister.check"
+msgstr "Enable legacy registration"
+
+msgid "plugins.generic.openid.settings.legacyRegister.desc"
+msgstr "Enable this option if you want users to be able to register with the application's register form in addition to the OpenID logon."
+
+msgid "plugins.generic.openid.settings.step2.connect"
+msgstr "Account Connection"
+
+msgid "plugins.generic.openid.settings.step2.connect.check"
+msgstr "Disable \"Account Connection\""
+
+msgid "plugins.generic.openid.settings.step2.connect.desc"
+msgstr "If this journal is new and has no existing user accounts, you can check this box to disable the account linking function. In this case the user will only be asked for additional details required by this application when registering an account via an OpenID provider."
+
+msgid "plugins.generic.openid.settings.hashSecret"
+msgstr "Encrypt/Decrypt secret"
+
+msgid "plugins.generic.openid.settings.hashSecret.desc"
+msgstr "If you want to encrypt the OpenID information like the OpenID identifier in the HTML code and you want to use the following function for the automated API-KEY generation, you have to enter a secret here. In order to be secure, the secret key should be at least 24 characters."
+
+msgid "plugins.generic.openid.settings.generateAPIKey"
+msgstr "Automated API Key"
+
+msgid "plugins.generic.openid.settings.generateAPIKey.check"
+msgstr "Enable automatic API key generation"
+
+msgid "plugins.generic.openid.settings.generateAPIKey.desc"
+msgstr "This plugin can generate a key by encrypting the OpenID identifier with <strong>the secret entered above</strong>. This key will be encrypted again with a secret that must be specified in the application settings. This should be adequately secure."
+
+msgid "plugins.generic.openid.settings.features.enable.provider.sync"
+msgstr "Enable OpenID provider user data synchronization"
+
+msgid "plugins.generic.openid.settings.features.enable.provider.sync.desc"
+msgstr "Some user information, such as the given name, family name and email address, is transferred from the OpenID Provider to this application. Enable this option to automatically save this user information to the user account. (recommended)"
+
+msgid "plugins.generic.openid.settings.features.disable.fields.desc"
+msgstr "Prevent the following fields from being modified within this application:"
+
+msgid "plugins.generic.openid.settings.features.disable.given"
+msgstr "<strong>Given name</strong> readonly"
+
+msgid "plugins.generic.openid.settings.features.disable.family"
+msgstr "<strong>Family name</strong> readonly"
+
+msgid "plugins.generic.openid.settings.features.disable.email"
+msgstr "<strong>Email</strong> readonly"
+
+# error messages
+msgid "plugins.generic.openid.error.openid.connect.desc.key"
+msgstr "<strong>An error occurred while verifying your data.</strong><br />The service may not be available right now.<br />Please try again later and <a href='mailto:{$supportEmail}'>contact technical support</a> if the problem still exists."
+
+msgid "plugins.generic.openid.error.openid.connect.desc.data"
+msgstr "<strong>An error occurred while receiving your data from the OpenId provider.</strong><br />The service may not be available right now.<br />Please try again later and <a href='mailto:{$supportEmail}'>contact technical support</a> if the problem still exists."
+
+msgid "plugins.generic.openid.error.openid.cert.desc"
+msgstr "<strong>An error occurred while validation and extracting your data.</strong><br />The service may not be available right now.<br />Please try again later and <a href='mailto:{$supportEmail}'>contact technical support</a> if the problem still exists."
+
+msgid "plugins.generic.openid.error.openid.disabled.without"
+msgstr "<strong>This account is disabled without any specific reason.</strong><br />Please <a href='mailto:{$supportEmail}'>contact technical support</a> to enable this account."
+
+msgid "plugins.generic.openid.error.openid.disabled.with"
+msgstr "<strong>This account is disabled for the following reason:</strong>"
+
+msgid "plugins.generic.openid.error.legacy.link"
+msgstr "Managers and support staff can sign in via this <a href=\"{$legacyLoginUrl}\">link</a> to solve this issue."
+
+#provider page
+msgid "plugins.generic.openid.select.provider"
+msgstr "Sign in or register"
+
+msgid "plugins.generic.openid.select.legacy"
+msgstr "Sign in with your account at {$journalName}"
+
+msgid "plugins.generic.openid.select.provider.help"
+msgstr "Sign in or register with:"
+
+msgid "plugins.generic.openid.select.provider.custom"
+msgstr "Sign in with custom provider"
+
+msgid "plugins.generic.openid.select.provider.orcid"
+msgstr "Sign in with Orcid"
+
+msgid "plugins.generic.openid.select.provider.google"
+msgstr "Sign in with Google"
+
+msgid "plugins.generic.openid.select.provider.microsoft"
+msgstr "Sign in with Microsoft"
+
+msgid "plugins.generic.openid.select.provider.apple"
+msgstr "Sign in with Apple"
+
+msgid "plugins.generic.openid.select.provider.legacyRegister"
+msgstr "Register Account (without Oauth)"
+
+# disabled fields info
+msgid "plugins.generic.openid.disables.fields.info"
+msgstr "Some information is provided by an authenticated account used to login and cannot be edited.<br /> The data will be synced whenever you log out and login again."
+
+msgid "plugins.generic.openid.disables.fields.info.orcid"
+msgstr "The ORCID is automatically provided by your authenticated ORCID account."
+
+msgid "plugins.generic.openid.disables.fields.info.api"
+msgstr "The API key is automatically generated by a plugin."
+
+msgid "plugins.generic.openid.disables.fields.info.password"
+msgstr "You are using a single sign-on authentication provider to log in, so you must change your password on the provider's account page."
+
+msgid "plugins.generic.openid.settings.provider.microsoft.audience"
+msgstr "Choose the audience setting that corresponds to the Azure Authentication service that you are currently using"
+
+msgid "plugins.generic.openid.step2.headline.siteNameMissing"
+msgstr "Do you already have an account?"
+
+msgid "plugins.generic.openid.step2.choice.no.siteNameMissing"
+msgstr "No, I'm new to this Site."
+
+msgid "plugins.generic.openid.step2.help.siteNameMissing"
+msgstr "Additional information is required to register:"
+
+msgid "plugins.generic.openid.step2.connect.siteNameMissing"
+msgstr "Please login to your account.<br />Your information will be updated automatically."
+
+msgid "plugins.generic.openid.settings.changesFailed"
+msgstr "Changes not saved successfully"
