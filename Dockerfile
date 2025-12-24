@@ -50,7 +50,8 @@ WORKDIR /var/www/html
 COPY . .
 
 # Fetch Git Submodules (Crucial for lib/pkp and plugins)
-RUN git submodule update --init --recursive
+RUN git config --global --add safe.directory /var/www/html \
+    && git submodule update --init --recursive
 
 # Install Node dependencies and build assets
 RUN npm install && npm run build
