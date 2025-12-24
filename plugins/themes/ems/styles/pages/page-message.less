@@ -1,0 +1,97 @@
+/**
+ * @file styles/pages/page-message.less
+ *
+ * @brief EMS theme message page styles
+ */
+
+.ems-message-page {
+    background-color: @light-mint;
+    padding: 40px 160px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    
+    @media (max-width: @screen-lg) {
+        padding: 40px 40px;
+    }
+    
+    @media (max-width: @screen-md) {
+        padding: 40px 20px;
+    }
+    
+    .message-wrapper {
+        max-width: 480px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    .message-container {
+        background-color: @white;
+        border: 1px solid #dae7e2;
+        border-radius: 12px;
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+        padding: 40px;
+        text-align: center;
+        
+        .message-header {
+            margin-bottom: 32px;
+            
+            .message-icon {
+                margin-bottom: 16px;
+                display: flex;
+                justify-content: center;
+                
+                svg {
+                    width: 64px;
+                    height: 64px;
+                }
+            }
+            
+            .message-title {
+                font-family: 'Manrope', sans-serif;
+                font-size: 28px;
+                font-weight: 700;
+                line-height: 36px;
+                color: @text-primary;
+                margin: 0;
+            }
+        }
+        
+        .message-content {
+            .message-text {
+                font-family: 'Manrope', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                color: @text-secondary;
+                margin-bottom: 32px;
+            }
+            
+            .message-actions {
+                .btn-back {
+                    background-color: @primary-green;
+                    color: @white;
+                    font-family: 'Manrope', sans-serif;
+                    font-size: 16px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    padding: 12px 24px;
+                    border: none;
+                    border-radius: 8px;
+                    text-decoration: none;
+                    display: inline-block;
+                    transition: all 0.15s ease-in-out;
+                    
+                    &:hover {
+                        background-color: darken(@primary-green, 10%);
+                    }
+                    
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0 0 0 3px rgba(1, 152, 99, 0.3);
+                    }
+                }
+            }
+        }
+    }
+}

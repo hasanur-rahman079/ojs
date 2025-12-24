@@ -1,0 +1,415 @@
+/**
+ * @file styles/pages/page-register.less
+ *
+ * Copyright (c) 2024-2025
+ * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ *
+ * @brief Registration page styles matching Figma design
+ *
+ */
+
+.ems-register-page {
+    min-height: calc(100vh - 65px - 201px); // Full height minus header and footer
+    background-color: #f7fcfa;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 160px;
+    
+    @media (max-width: @screen-lg) {
+        padding: 20px 40px;
+    }
+    
+    @media (max-width: @screen-md) {
+        padding: 20px;
+    }
+    
+    .register-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px 0;
+        min-height: 1229px;
+        
+        @media (max-width: @screen-md) {
+            min-height: auto;
+        }
+    }
+    
+    .register-container {
+        width: 672px;
+        padding-top: 87.5px;
+        
+        @media (max-width: @screen-md) {
+            width: 100%;
+            padding-top: 40px;
+        }
+    }
+    
+    .register-card {
+        background: #ffffff;
+        border: 1px solid #dae7e2;
+        border-radius: 12px;
+        padding: 33px;
+        
+        @media (max-width: @screen-sm) {
+            padding: 24px;
+        }
+        
+        .register-content {
+            .register-header {
+                margin-bottom: 24px;
+                
+                .register-title {
+                    font-family: 'Manrope', sans-serif;
+                    font-size: 30px;
+                    font-weight: 700;
+                    line-height: 36px;
+                    letter-spacing: -0.75px;
+                    color: #101816;
+                    margin: 0 0 8px 0;
+                    text-align: center;
+                }
+                
+                .register-subtitle {
+                    font-family: 'Manrope', sans-serif;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 20px;
+                    color: #0a3047;
+                    text-align: center;
+                    margin: 0;
+                }
+            }
+        }
+    }
+    
+    .register-form {
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+            
+            @media (max-width: @screen-sm) {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        // ORCID Section
+        .orcid-section {
+            background: linear-gradient(135deg, #f8fffe 0%, #f0fdf7 100%);
+            border: 1px solid #d1fae5;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            
+            .orcid-header {
+                display: flex;
+                align-items: flex-start;
+                gap: 16px;
+                margin-bottom: 20px;
+                
+                .orcid-icon-container {
+                    flex-shrink: 0;
+                    
+                    .orcid-icon {
+                        filter: drop-shadow(0 2px 4px rgba(166, 206, 57, 0.2));
+                    }
+                }
+                
+                .orcid-content {
+                    flex: 1;
+                    
+                    .orcid-title {
+                        font-family: 'Manrope', sans-serif;
+                        font-size: 18px;
+                        font-weight: 600;
+                        line-height: 26px;
+                        color: #101816;
+                        margin: 0 0 8px 0;
+                    }
+                    
+                    .orcid-description {
+                        font-family: 'Manrope', sans-serif;
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 20px;
+                        color: #374151;
+                        margin: 0;
+                        
+                        .orcid-link {
+                            color: #019863;
+                            text-decoration: none;
+                            font-weight: 500;
+                            
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            .orcid-actions {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                flex-wrap: wrap;
+                
+                .orcid-connect-btn {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 12px 20px;
+                    background: #ffffff;
+                    border: 1px solid #A6CE39;
+                    border-radius: 8px;
+                    font-family: 'Manrope', sans-serif;
+                    font-size: 14px;
+                    font-weight: 600;
+                    line-height: 20px;
+                    color: #101816;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    
+                    .orcid-btn-icon {
+                        flex-shrink: 0;
+                    }
+                    
+                    &:hover {
+                        background: #A6CE39;
+                        color: #ffffff;
+                        transform: translateY(-1px);
+                        box-shadow: 0 4px 12px rgba(166, 206, 57, 0.3);
+                        
+                        .orcid-btn-icon {
+                            filter: brightness(0) invert(1);
+                        }
+                    }
+                    
+                    &:active {
+                        transform: translateY(0);
+                    }
+                }
+                
+                .orcid-register-link {
+                    display: inline-flex;
+                    align-items: center;
+                    padding: 8px 16px;
+                    background: transparent;
+                    border: 1px solid #019863;
+                    border-radius: 6px;
+                    font-family: 'Manrope', sans-serif;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 20px;
+                    color: #019863;
+                    text-decoration: none;
+                    transition: all 0.2s ease;
+                    
+                    &:hover {
+                        background: #019863;
+                        color: #ffffff;
+                        text-decoration: none;
+                    }
+                }
+                
+                .orcid-optional {
+                    font-family: 'Manrope', sans-serif;
+                    font-size: 12px;
+                    font-weight: 500;
+                    color: #6b7280;
+                    background: #f3f4f6;
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                }
+            }
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            
+            .form-label {
+                display: block;
+                font-family: 'Manrope', sans-serif;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 24px;
+                color: #101816;
+                margin-bottom: 8px;
+                
+                .required {
+                    color: #dc3545;
+                }
+            }
+            
+            .form-input,
+            .form-select,
+            .form-textarea {
+                width: 100%;
+                padding: 16px;
+                border: 1px solid #dae7e2;
+                border-radius: 8px;
+                font-family: 'Manrope', sans-serif;
+                font-size: 16px;
+                line-height: 22px;
+                color: #101816;
+                background-color: #ffffff;
+                transition: all 0.15s ease-in-out;
+                
+                &:focus {
+                    outline: none;
+                    border-color: #019863;
+                    box-shadow: 0 0 0 3px rgba(1, 152, 99, 0.1);
+                }
+                
+                &::placeholder {
+                    color: #0a3047;
+                    font-family: 'Manrope', sans-serif;
+                    font-size: 16px;
+                    font-weight: 400;
+                }
+            }
+            
+            .form-select {
+                appearance: none;
+                background-image: url('/plugins/themes/ems/templates/images/icon-dropdown.svg');
+                background-repeat: no-repeat;
+                background-position: right 16px center;
+                background-size: 24px 24px;
+                padding-right: 48px;
+                cursor: pointer;
+                background-color: #ffffff;
+            }
+            
+            .form-textarea {
+                resize: vertical;
+                min-height: 128px;
+            }
+            
+            &.checkbox-group {
+                margin-bottom: 24px;
+                
+                .checkbox-label {
+                    display: flex;
+                    align-items: flex-start;
+                    cursor: pointer;
+                    gap: 12px;
+                    margin-bottom: 12px;
+                    
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                    
+                    .checkbox-input {
+                        width: 16px;
+                        height: 16px;
+                        border: 1px solid #d1d5db;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        margin: 2px 0 0 0;
+                        flex-shrink: 0;
+                        
+                        &:checked {
+                            accent-color: #019863;
+                            background-color: #019863;
+                        }
+                    }
+                    
+                    .checkbox-text {
+                        font-family: 'Manrope', sans-serif;
+                        font-size: 14px;
+                        font-weight: 500;
+                        line-height: 20px;
+                        color: #101816;
+                        
+                        a {
+                            color: #019863;
+                            text-decoration: underline;
+                            
+                            &:hover {
+                                color: darken(#019863, 10%);
+                            }
+                        }
+                    }
+                }
+                
+                &.reviewer-section {
+                    .form-label {
+                        margin-bottom: 12px;
+                        font-size: 14px;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+        
+        .register-button {
+            width: 100%;
+            background-color: #019863;
+            color: #ffffff;
+            border: none;
+            padding: 13px 17px;
+            border-radius: 8px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            margin-bottom: 24px;
+            
+            &:hover {
+                background-color: darken(#019863, 10%);
+            }
+            
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(1, 152, 99, 0.2);
+            }
+        }
+        
+        .register-footer {
+            text-align: center;
+            
+            .login-text {
+                font-family: 'Manrope', sans-serif;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 20px;
+                color: #0a3047;
+                display: inline;
+            }
+            
+            .login-link {
+                font-family: 'Manrope', sans-serif;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 20px;
+                color: #019863;
+                text-decoration: none;
+                display: inline;
+                
+                &:hover {
+                    color: darken(#019863, 10%);
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: @screen-sm) {
+    .ems-register-page {
+        padding: 16px;
+        
+        .register-wrapper {
+            padding: 16px 0;
+        }
+        
+        .register-card {
+            padding: 24px;
+        }
+    }
+}

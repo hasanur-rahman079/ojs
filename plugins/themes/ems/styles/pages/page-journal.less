@@ -1,0 +1,223 @@
+/**
+ * @file styles/pages/page-journal.less
+ *
+ * Copyright (c) 2024-2025
+ * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ *
+ * @brief Journal home page styles matching Figma design
+ *
+ */
+
+.ems-journal-homepage {
+    min-height: calc(100vh - 65px - 257px);
+    background-color: #f7fcfa;
+    padding: 20px 160px;
+    
+    @media (max-width: @screen-lg) {
+        padding: 20px 40px;
+    }
+    
+    @media (max-width: @screen-md) {
+        padding: 20px;
+    }
+    
+    .journal-content {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .journal-hero-container {
+        display: flex;
+        flex-direction: column;
+        gap: 56px;
+        align-items: center;
+    }
+    
+    .journal-intro {
+        display: flex;
+        gap: 24px;
+        width: 100%;
+        align-items: flex-start;
+        padding-top: 70.5px;
+        
+        @media (max-width: @screen-md) {
+            flex-direction: column;
+            padding-top: 20px;
+        }
+        
+        .journal-image-wrapper {
+            flex-shrink: 0;
+            
+            .journal-image {
+                width: 160px;
+                height: 100%;
+                border-radius: 8px;
+                object-fit: cover;
+            }
+            
+            .journal-image-placeholder {
+                width: 160px;
+                height: 160px;
+                border-radius: 8px;
+                background: linear-gradient(135deg, #0a3047 0%, #0abf96 100%);
+            }
+        }
+        
+        .journal-details {
+            flex: 1;
+            
+            .journal-title {
+                font-family: 'Manrope', sans-serif;
+                font-size: 38px;
+                font-weight: 700;
+                line-height: 54px;
+                color: #0d1c1a;
+                margin: 0 0 16px 0;
+                
+                @media (max-width: @screen-md) {
+                    font-size: 28px;
+                    line-height: 32px;
+                }
+            }
+            
+            .journal-description {
+                font-family: 'Manrope', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                color: #6b7280;
+                margin: 0;
+            }
+        }
+    }
+    
+    .journal-actions {
+        width: 100%;
+        max-width: 512px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        
+        @media (max-width: @screen-sm) {
+            max-width: 100%;
+        }
+        
+        .btn-submit {
+            background-color: #fbbf24;
+            color: #0d1c1a;
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.15s ease-in-out;
+            
+            &:hover {
+                background-color: darken(#fbbf24, 10%);
+            }
+        }
+        
+        .auth-actions {
+            display: flex;
+            gap: 16px;
+            
+            @media (max-width: @screen-sm) {
+                flex-direction: column;
+            }
+            
+            .btn {
+                flex: 1;
+                padding: 12px;
+                border-radius: 8px;
+                text-decoration: none;
+                text-align: center;
+                font-family: 'Manrope', sans-serif;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 24px;
+                transition: all 0.15s ease-in-out;
+            }
+            
+            .btn-register {
+                background-color: #e5e7eb;
+                color: #0d1c1a;
+                border: none;
+                
+                &:hover {
+                    background-color: darken(#e5e7eb, 5%);
+                }
+            }
+            
+            .btn-login-dark {
+                background-color: #003366;
+                color: #ffffff;
+                border: none;
+                
+                &:hover {
+                    background-color: darken(#003366, 10%);
+                }
+            }
+        }
+    }
+    
+    .journal-badges {
+        display: flex;
+        gap: 57px;
+        align-items: center;
+        justify-content: center;
+        
+        @media (max-width: @screen-sm) {
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .badge {
+            .badge-image {
+                height: 58px;
+                width: auto;
+                object-fit: contain;
+                
+                &.crossref {
+                    height: 59px;
+                    width: 91px;
+                }
+            }
+        }
+    }
+}
+
+// Override page background for journal pages
+.pkp_page_index.pkp_op_index {
+    background-color: #f7fcfa;
+}
+
+// Journal header styles for when displayed in journal context
+.pkp_page_index.pkp_op_index {
+    .ems-header {
+        .ems-brand {
+            .journal-name {
+                font-family: 'Manrope', sans-serif;
+                font-size: 20px;
+                font-weight: 700;
+                line-height: 38px;
+                color: #0d1c1a;
+                
+                @media (max-width: @screen-md) {
+                    font-size: 18px;
+                    line-height: 28px;
+                }
+            }
+        }
+        
+        .nav-links {
+            .nav-link {
+                font-size: 14px;
+                font-weight: 600;
+            }
+        }
+    }
+}

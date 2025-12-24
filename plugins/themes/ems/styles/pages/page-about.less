@@ -1,0 +1,108 @@
+/**
+ * @file styles/pages/page-about.less
+ *
+ * Copyright (c) 2024-2025
+ * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ *
+ * @brief About page styles
+ *
+ */
+
+.ems-about-page {
+    min-height: calc(100vh - 65px - 257px);
+    background-color: #f7fcfa;
+    padding: 40px 160px;
+    
+    @media (max-width: @screen-lg) {
+        padding: 40px 40px;
+    }
+    
+    @media (max-width: @screen-md) {
+        padding: 40px 20px;
+    }
+    
+    .about-container {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+    
+    .about-content {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 40px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        
+        @media (max-width: @screen-md) {
+            padding: 24px;
+        }
+        
+        .about-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 44px;
+            color: #0a3047;
+            margin: 0 0 24px 0;
+            text-align: center;
+        }
+        
+        .about-body {
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            line-height: 24px;
+            color: #374151;
+            
+            p {
+                margin-bottom: 16px;
+                
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+            
+            h2 {
+                font-size: 24px;
+                font-weight: 700;
+                margin: 32px 0 16px 0;
+                color: #0a3047;
+                
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+            
+            h3 {
+                font-size: 20px;
+                font-weight: 600;
+                margin: 24px 0 12px 0;
+                color: #0a3047;
+            }
+            
+            ul, ol {
+                margin-bottom: 16px;
+                padding-left: 24px;
+                
+                li {
+                    margin-bottom: 8px;
+                }
+            }
+            
+            a {
+                color: #019863;
+                text-decoration: none;
+                
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            
+            img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                margin: 16px 0;
+            }
+        }
+    }
+}
+

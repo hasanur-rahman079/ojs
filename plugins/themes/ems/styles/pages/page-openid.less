@@ -1,0 +1,711 @@
+/**
+ * OpenID Plugin Pages Styling for EMS Theme
+ * Maintains consistent styling when OpenID plugin is enabled
+ */
+
+// OpenID Login Page
+.page_openid_login {
+  .login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #f7fcfa 0%, #e8f5f0 100%);
+  }
+
+  .login-container {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .login-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(10, 48, 71, 0.1);
+    overflow: hidden;
+  }
+
+  .login-content {
+    padding: 3rem 2.5rem;
+  }
+
+  .login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .login-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0a3047;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+  }
+
+  .login-subtitle {
+    font-size: 1rem;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .login-message {
+    background: #dbeafe;
+    border: 1px solid #93c5fd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+
+    p {
+      margin: 0;
+      color: #1e40af;
+      font-size: 0.875rem;
+    }
+  }
+
+  .openid-error {
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+
+    .error-message {
+      color: #dc2626;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .error-reason {
+      color: #991b1b;
+      font-size: 0.875rem;
+      margin: 0;
+    }
+  }
+
+  .openid-info {
+    background: #fef3c7;
+    border: 1px solid #fbbf24;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+
+    a {
+      color: #d97706;
+      text-decoration: underline;
+      font-weight: 500;
+
+      &:hover {
+        color: #b45309;
+      }
+    }
+  }
+
+  // OpenID Providers Section
+  .openid-providers {
+    margin-bottom: 2rem;
+
+    .providers-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #0a3047;
+      margin: 0 0 1rem 0;
+      text-align: center;
+    }
+
+    .providers-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .provider-btn {
+      display: block;
+      width: 100%;
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      position: relative;
+
+      &:hover {
+        border-color: #0a3047;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(10, 48, 71, 0.15);
+      }
+
+      .provider-content {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .provider-icon {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+      }
+
+      .provider-text {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #0a3047;
+      }
+
+      // Specific provider styling
+      &.orcid-provider {
+        border-color: #a6ce39;
+        background: linear-gradient(135deg, #ffffff 0%, #f8fdf0 100%);
+
+        &:hover {
+          border-color: #8bb82e;
+          box-shadow: 0 4px 12px rgba(166, 206, 57, 0.2);
+        }
+      }
+
+      &.google-provider {
+        border-color: #4285f4;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+
+        &:hover {
+          border-color: #3367d6;
+          box-shadow: 0 4px 12px rgba(66, 133, 244, 0.2);
+        }
+      }
+
+      &.facebook-provider {
+        border-color: #1877f2;
+        background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+
+        &:hover {
+          border-color: #166fe5;
+          box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2);
+        }
+      }
+
+      &.custom-provider {
+        border-color: #0abf96;
+        background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%);
+
+        &:hover {
+          border-color: #019863;
+          box-shadow: 0 4px 12px rgba(10, 191, 150, 0.2);
+        }
+      }
+    }
+  }
+
+  // Legacy Login Form
+  .legacy-login {
+    .login-divider {
+      position: relative;
+      text-align: center;
+      margin: 2rem 0 1.5rem 0;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: #e5e7eb;
+        z-index: 1;
+      }
+
+      .divider-text {
+        background: white;
+        padding: 0 1rem;
+        color: #6b7280;
+        font-size: 0.875rem;
+        position: relative;
+        z-index: 2;
+      }
+    }
+
+    .login-form {
+      .form-fields {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .form-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #0a3047;
+        margin-bottom: 0.5rem;
+
+        .required {
+          color: #dc2626;
+        }
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+        background: white;
+
+        &:focus {
+          outline: none;
+          border-color: #0a3047;
+          box-shadow: 0 0 0 3px rgba(10, 48, 71, 0.1);
+        }
+
+        &::placeholder {
+          color: #9ca3af;
+        }
+      }
+
+      .password-actions {
+        margin-top: 0.5rem;
+        text-align: right;
+      }
+
+      .forgot-link {
+        color: #0abf96;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+
+        &:hover {
+          color: #019863;
+          text-decoration: underline;
+        }
+      }
+
+      .checkbox-group {
+        margin: 1.5rem 0;
+      }
+
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+        font-size: 0.875rem;
+        color: #0a3047;
+
+        .checkbox-input {
+          width: 16px;
+          height: 16px;
+          accent-color: #0abf96;
+        }
+
+        .checkbox-text {
+          line-height: 1.4;
+        }
+      }
+
+      .login-button {
+        width: 100%;
+        background: linear-gradient(135deg, #0a3047 0%, #001f2e 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-top: 1rem;
+
+        &:hover {
+          background: linear-gradient(135deg, #001f2e 0%, #001118 100%);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(10, 48, 71, 0.3);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+
+  .login-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+
+    .register-text {
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+
+    .register-link {
+      color: #0abf96;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+
+      &:hover {
+        color: #019863;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// OpenID Auth Step 2 Page
+.page_oauth {
+  .register-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #f7fcfa 0%, #e8f5f0 100%);
+  }
+
+  .register-container {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .register-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(10, 48, 71, 0.1);
+    overflow: hidden;
+  }
+
+  .register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    .register-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0a3047;
+      margin: 0 0 0.5rem 0;
+      line-height: 1.2;
+    }
+
+    .register-subtitle {
+      font-size: 1rem;
+      color: #6b7280;
+      margin: 0;
+      line-height: 1.5;
+    }
+  }
+
+  // Choice Section
+  .choice-section {
+    margin-bottom: 2rem;
+    text-align: center;
+
+    .choice-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #0a3047;
+      margin: 0 0 1rem 0;
+    }
+
+    .choice-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+
+      .choice-btn {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #6b7280;
+        flex: 1;
+        max-width: 250px;
+        text-align: center;
+
+        &:hover {
+          border-color: #0a3047;
+          color: #0a3047;
+          transform: translateY(-1px);
+          box-shadow: 0 2px 8px rgba(10, 48, 71, 0.1);
+        }
+
+        &.active {
+          background: linear-gradient(135deg, #0a3047 0%, #001f2e 100%);
+          border-color: #0a3047;
+          color: white;
+          box-shadow: 0 4px 12px rgba(10, 48, 71, 0.2);
+        }
+
+        .choice-text {
+          display: block;
+        }
+      }
+    }
+  }
+
+  // Form Sections
+  .form-section {
+    .form-notification {
+      background: #fef3c7;
+      border: 1px solid #fbbf24;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+
+      .notification-content {
+        color: #d97706;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        margin: 0;
+      }
+    }
+
+    .register-form {
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+
+        @media (max-width: 640px) {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .form-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #0a3047;
+        margin-bottom: 0.5rem;
+
+        .required {
+          color: #dc2626;
+        }
+      }
+
+      .form-input,
+      .form-select {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+        background: white;
+
+        &:focus {
+          outline: none;
+          border-color: #0a3047;
+          box-shadow: 0 0 0 3px rgba(10, 48, 71, 0.1);
+        }
+
+        &::placeholder {
+          color: #9ca3af;
+        }
+      }
+
+      .form-select {
+        cursor: pointer;
+      }
+
+      // Consent Section
+      .consent-section {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+
+        .checkbox-group {
+          margin-bottom: 1rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        .checkbox-label {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.75rem;
+          cursor: pointer;
+          font-size: 0.875rem;
+          color: #0a3047;
+          line-height: 1.5;
+
+          .checkbox-input {
+            width: 16px;
+            height: 16px;
+            accent-color: #0abf96;
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+          }
+
+          .checkbox-text {
+            line-height: 1.4;
+          }
+
+          .required {
+            color: #dc2626;
+            margin-left: 0.25rem;
+          }
+        }
+      }
+
+      // Reviewer Section
+      .reviewer-section {
+        background: #f0fdfa;
+        border: 1px solid #a7f3d0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+
+        .reviewer-title {
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: #0a3047;
+          margin: 0 0 1rem 0;
+        }
+
+        .reviewer-prompt {
+          color: #065f46;
+          font-size: 0.875rem;
+          margin: 0 0 1rem 0;
+          line-height: 1.5;
+        }
+
+        .checkbox-group {
+          margin-bottom: 1rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        .checkbox-label {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.75rem;
+          cursor: pointer;
+          font-size: 0.875rem;
+          color: #0a3047;
+          line-height: 1.5;
+          margin-bottom: 0.75rem;
+
+          .checkbox-input {
+            width: 16px;
+            height: 16px;
+            accent-color: #0abf96;
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+          }
+
+          .checkbox-text {
+            line-height: 1.4;
+          }
+        }
+      }
+
+      .register-button,
+      .login-button,
+      .connect-button {
+        width: 100%;
+        background: linear-gradient(135deg, #0a3047 0%, #001f2e 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-top: 1.5rem;
+        position: relative;
+        z-index: 10;
+
+        &:hover {
+          background: linear-gradient(135deg, #001f2e 0%, #001118 100%);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(10, 48, 71, 0.3);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+
+        &:focus {
+          outline: 2px solid #0abf96;
+          outline-offset: 2px;
+        }
+      }
+
+      // Specific styling for connect button
+      .connect-button {
+        background: linear-gradient(135deg, #0a3047 0%, #001f2e 100%);
+        border: 2px solid #0a3047;
+        
+        &:hover {
+          background: linear-gradient(135deg, #001f2e 0%, #001118 100%);
+          border-color: #001f2e;
+        }
+      }
+    }
+  }
+
+  // Responsive Design
+  @media (max-width: 768px) {
+    .register-content,
+    .login-content {
+      padding: 2rem 1.5rem;
+    }
+
+    .choice-buttons {
+      flex-direction: column;
+      align-items: center;
+
+      .choice-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .register-content,
+    .login-content {
+      padding: 1.5rem 1rem;
+    }
+
+    .login-title,
+    .register-title {
+      font-size: 1.75rem;
+    }
+  }
+}

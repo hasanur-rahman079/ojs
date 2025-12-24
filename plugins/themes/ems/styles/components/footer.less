@@ -1,0 +1,121 @@
+/**
+ * @file styles/components/footer.less
+ *
+ * Copyright (c) 2024-2025
+ * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ *
+ * @brief Footer styles matching Figma design
+ *
+ */
+
+.ems-footer {
+    background-color: #ffffff;
+    border-top: 1px solid #4a9c8c;
+    padding: 0;
+    
+    // Override OJS footer styles
+    &.pkp_structure_foot {
+        background: #ffffff !important;
+        border-top: 1px solid #4a9c8c !important;
+        margin-top: auto;
+    }
+    
+    .footer-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 1px 160px 0 160px;
+        
+        @media (max-width: @screen-lg) {
+            padding: 1px 40px 0 40px;
+        }
+        
+        @media (max-width: @screen-md) {
+            padding: 1px 20px 0 20px;
+        }
+    }
+    
+    .footer-content {
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+        
+        .footer-links-row {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            
+            .footer-link {
+                font-family: 'Work Sans', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                color: #0a3047;
+                text-decoration: none;
+                transition: all 0.15s ease-in-out;
+                
+                &:hover {
+                    color: #0abf96;
+                }
+            }
+        }
+        
+        .footer-powered {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            color: rgba(10, 48, 71, 0.8);
+        }
+        
+        .footer-copyright {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            color: #0a3047;
+        }
+    }
+    
+    // Journal-specific footer
+    &.journal-footer {
+        .journal-footer-content {
+            .footer-logo {
+                margin-bottom: 24px;
+                display: flex;
+                justify-content: center;
+                
+                a {
+                    display: inline-block;
+                    transition: opacity 0.15s ease-in-out;
+                    
+                    &:hover {
+                        opacity: 0.8;
+                    }
+                }
+                
+                .footer-brand-logo {
+                    height: 100px;
+                    width: auto;
+                    object-fit: contain;
+                }
+            }
+            
+            .footer-bottom {
+                
+                @media (max-width: @screen-md) {
+                    flex-direction: column;
+                    gap: 8px;
+                }
+                
+                .footer-powered,
+                .footer-copyright {
+                    font-size: 14px;
+                    line-height: 24px;
+                }
+            }
+        }
+    }
+}

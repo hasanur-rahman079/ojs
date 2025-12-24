@@ -1,0 +1,304 @@
+/**
+ * @file styles/pages/page-login.less
+ *
+ * Copyright (c) 2024-2025
+ * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ *
+ * @brief Login page styles matching Figma design
+ *
+ */
+
+.ems-login-page {
+    min-height: calc(100vh - 65px - 201px); // Full height minus header and footer
+    background-color: #f7fcfa;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 160px;
+    
+    @media (max-width: @screen-lg) {
+        padding: 20px 40px;
+    }
+    
+    @media (max-width: @screen-md) {
+        padding: 20px;
+    }
+    
+    .login-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px 0;
+        min-height: 669px;
+        
+        @media (max-width: @screen-md) {
+            min-height: auto;
+        }
+    }
+    
+    .login-container {
+        width: 448px;
+        padding-top: 94px;
+        
+        @media (max-width: @screen-sm) {
+            width: 100%;
+            padding-top: 40px;
+        }
+    }
+    
+    .login-card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+        padding: 32px;
+        
+        @media (max-width: @screen-sm) {
+            padding: 24px;
+        }
+        
+        .login-content {
+            .login-header {
+                margin-bottom: 24px;
+                
+                .login-title {
+                    font-family: 'Manrope', sans-serif;
+                    font-size: 24px;
+                    font-weight: 700;
+                    line-height: 32px;
+                    color: #1f2937;
+                    margin: 0 0 8px 0;
+                    text-align: center;
+                }
+                
+                .login-subtitle {
+                    font-family: 'Manrope', sans-serif;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 20px;
+                    color: #6b7280;
+                    text-align: center;
+                    margin: 0;
+                }
+            }
+            
+            .login-error {
+                background-color: #fef2f2;
+                border: 1px solid #fecaca;
+                color: #dc2626;
+                padding: 12px;
+                border-radius: 8px;
+                margin-bottom: 16px;
+                font-size: 14px;
+            }
+            
+            .login-message {
+                background-color: #f0f9ff;
+                border: 1px solid #bae6fd;
+                color: #0369a1;
+                padding: 12px;
+                border-radius: 8px;
+                margin-bottom: 16px;
+                font-size: 14px;
+            }
+        }
+    }
+    
+    .login-form {
+        .form-group {
+            margin-bottom: 24px;
+            
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+            
+            .form-label {
+                display: block;
+                font-family: 'Manrope', sans-serif;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 20px;
+                color: #374151;
+                margin-bottom: 8px;
+            }
+            
+            .form-input {
+                width: 100%;
+                padding: 13px;
+                border: 1px solid #d1d5db;
+                border-radius: 8px;
+                font-family: 'Manrope', sans-serif;
+                font-size: 14px;
+                line-height: 19px;
+                background-color: #ffffff;
+                transition: all 0.15s ease-in-out;
+                
+                &:focus {
+                    outline: none;
+                    border-color: #003366;
+                    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+                }
+                
+                &::placeholder {
+                    color: #9ca3af;
+                    font-family: 'Manrope', sans-serif;
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+            }
+            
+            .password-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+                
+                .forgot-password {
+                    font-family: 'Manrope', sans-serif;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 20px;
+                    color: #003366;
+                    text-decoration: none;
+                    transition: all 0.15s ease-in-out;
+                    
+                    &:hover {
+                        color: darken(#003366, 10%);
+                        text-decoration: underline;
+                    }
+                }
+            }
+            
+            .password-input-wrapper {
+                position: relative;
+                
+                .password-input {
+                    padding-right: 44px;
+                }
+                
+                .password-toggle {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    padding: 10px 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.15s ease-in-out;
+                    
+                    &:hover {
+                        opacity: 0.7;
+                    }
+                    
+                    .eye-icon {
+                        width: 20px;
+                        height: 24px;
+                    }
+                }
+            }
+            
+            &.checkbox-group {
+                margin-bottom: 24px;
+                
+                .checkbox-label {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    gap: 12px;
+                    
+                    .checkbox-input {
+                        width: 16px;
+                        height: 16px;
+                        border: 1px solid #d1d5db;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        margin: 0;
+                        
+                        &:checked {
+                            accent-color: #003366;
+                        }
+                    }
+                    
+                    .checkbox-text {
+                        font-family: 'Manrope', sans-serif;
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 20px;
+                        color: #374151;
+                    }
+                }
+            }
+        }
+        
+        .login-button {
+            width: 100%;
+            background-color: #003366;
+            color: #ffffff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 20px;
+            letter-spacing: 0.35px;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            margin-bottom: 24px;
+            
+            &:hover {
+                background-color: darken(#003366, 10%);
+            }
+            
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.2);
+            }
+        }
+        
+        .login-footer {
+            text-align: center;
+            
+            .register-text {
+                font-family: 'Manrope', sans-serif;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 20px;
+                color: #6b7280;
+                display: inline;
+            }
+            
+            .register-link {
+                font-family: 'Manrope', sans-serif;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 20px;
+                color: #003366;
+                text-decoration: none;
+                display: inline;
+                
+                &:hover {
+                    color: darken(#003366, 10%);
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: @screen-sm) {
+    .ems-login-page {
+        padding: 16px;
+        
+        .login-wrapper {
+            padding: 16px 0;
+        }
+        
+        .login-card {
+            padding: 24px;
+        }
+    }
+}
