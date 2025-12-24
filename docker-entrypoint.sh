@@ -8,26 +8,26 @@ if [ ! -f config.inc.php ]; then
 fi
 
 # Function to update OJS config
-# Usage: set_config "section" "key" "value"
+# Use standard OJS 3.5 names or our custom mapping
 set_config() {
     local section=$1
     local key=$2
     local value=$3
     if [ -n "$value" ]; then
         echo "Configuring [$section] $key = $value"
-        # Find the line (even if commented with ;) in the specific section and replace it
+        # Search for the key in the specific section and replace it
+        # Handles both commented and uncommented lines
         sed -i "/^\[$section\]/,/^\[/ s|^;*[[:space:]]*$key[[:space:]]*=.*|$key = $value|" config.inc.php
     fi
 }
 
-# 1. Apply Essential Defaults for Proxy/Dokploy
+# 1. Essential Defaults for Proxy/SSL
 set_config "general" "restful_urls" "Off"
 set_config "general" "trust_x_forwarded_for" "On"
 set_config "security" "force_ssl" "On"
 set_config "security" "force_login_ssl" "On"
 
-# 2. Map standard OJS Environment Variables if they exist
-set_config "general" "base_url" "\"${OJS_BASE_URL}\""
+# 2. Database Mapping (Standardized names)
 set_config "database" "driver" "${OJS_DB_DRIVER:-postgres}"
 set_config "database" "host" "${OJS_DB_HOST}"
 set_config "database" "port" "${OJS_DB_PORT:-5432}"
@@ -35,18 +35,22 @@ set_config "database" "username" "${OJS_DB_USER}"
 set_config "database" "password" "\"${OJS_DB_PASSWORD}\""
 set_config "database" "name" "${OJS_DB_NAME}"
 
-# 3. Dynamic Configuration via OJSCONFIG_ prefix
-# Format: OJSCONFIG_SECTION_KEY (e.g. OJSCONFIG_EMAIL_SMTP_SERVER)
-for var in $(env | grep "^OJSCONFIG_"); do
-    config_pair=${var#OJSCONFIG_}
+# 3. Handle PKP_CONF_ style variables (OJS 3.5 standard)
+# Format: PKP_CONF_SECTION_KEY (e.g. PKP_CONF_GENERAL_BASE_URL)
+for var in $(env | grep "^PKP_CONF_"); do
+    config_pair=${var#PKP_CONF_}
     config_key_full=${config_pair%%=*}
     config_value=${config_pair#*=}
     
-    # Extract Section and Key (assumes SECTION_KEY format)
     section=$(echo $config_key_full | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
     key=$(echo $config_key_full | cut -d'_' -f2- | tr '[:upper:]' '[:lower:]')
     
-    set_config "$section" "$key" "\"$config_value\""
+    # Check if value needs quotes (simple check)
+    if [[ "$config_value" =~ [[:space:]] ]] || [[ "$config_value" =~ ^https?:// ]]; then
+        set_config "$section" "$key" "\"$config_value\""
+    else
+        set_config "$section" "$key" "$config_value"
+    fi
 done
 
 # 4. Generate APP_KEY if it's empty
