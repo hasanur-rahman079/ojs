@@ -53,6 +53,7 @@ COPY . .
 # Ensure config.inc.php exists and pre-configure it for SSL/Proxies
 RUN if [ ! -f config.inc.php ]; then cp config.TEMPLATE.inc.php config.inc.php; fi \
     && sed -i 's|base_url = ".*"|base_url = "https://my.ems.pub"|' config.inc.php \
+    && sed -i '/base_url = "https:\/\/my.ems.pub"/a base_url[index] = "https://my.ems.pub"' config.inc.php \
     && sed -i 's/trust_x_forwarded_for = Off/trust_x_forwarded_for = On/' config.inc.php \
     && sed -i 's/force_ssl = Off/force_ssl = On/' config.inc.php \
     && sed -i 's/force_login_ssl = Off/force_login_ssl = On/' config.inc.php
@@ -81,7 +82,8 @@ RUN chown -R www-data:www-data /var/www/html /var/www/ojs-files \
 RUN echo "<Directory /var/www/html>\n\
     AllowOverride All\n\
     Require all granted\n\
-    </Directory>" > /etc/apache2/conf-available/ojs.conf \
+    </Directory>\n\
+    SetEnvIf X-Forwarded-Proto \"^https$\" HTTPS=on" > /etc/apache2/conf-available/ojs.conf \
     && a2enconf ojs
 
 EXPOSE 80
