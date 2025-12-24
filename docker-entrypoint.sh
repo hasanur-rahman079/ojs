@@ -15,9 +15,8 @@ set_config() {
     local value=$3
     if [ -n "$value" ]; then
         echo "Configuring [$section] $key = $value"
-        # Find the section, then find the key within that section and replace it
-        # We use | as delimiter for sed to handle URLs in base_url
-        sed -i "/^\[$section\]/,/^\[/ s|^$key =.*|$key = $value|" config.inc.php
+        # Find the line (even if commented with ;) in the specific section and replace it
+        sed -i "/^\[$section\]/,/^\[/ s|^;*[[:space:]]*$key[[:space:]]*=.*|$key = $value|" config.inc.php
     fi
 }
 
@@ -28,10 +27,10 @@ set_config "security" "force_ssl" "On"
 set_config "security" "force_login_ssl" "On"
 
 # 2. Map standard OJS Environment Variables if they exist
-# These are the ones we'll recommend for the Dokploy UI
 set_config "general" "base_url" "\"${OJS_BASE_URL}\""
 set_config "database" "driver" "${OJS_DB_DRIVER:-postgres}"
 set_config "database" "host" "${OJS_DB_HOST}"
+set_config "database" "port" "${OJS_DB_PORT:-5432}"
 set_config "database" "username" "${OJS_DB_USER}"
 set_config "database" "password" "\"${OJS_DB_PASSWORD}\""
 set_config "database" "name" "${OJS_DB_NAME}"
