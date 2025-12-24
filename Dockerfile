@@ -31,7 +31,8 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     curl \
     fileinfo \
     gettext \
-    session
+    session \
+    ftp
 
 # Install Node.js (Required for OJS 3.5 Assets)
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
