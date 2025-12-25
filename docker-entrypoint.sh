@@ -19,6 +19,7 @@ set_config() {
     local value=$3
     if [ -n "$value" ]; then
         echo "Configuring [$section] $key = $value"
+        # Handles both commented and uncommented lines
         sed -i "/^\[$section\]/,/^\[/ s|^;*[[:space:]]*$key[[:space:]]*=.*|$key = $value|" config.inc.php
     fi
 }
@@ -33,7 +34,7 @@ set_config "security" "force_ssl" "On"
 set_config "security" "force_login_ssl" "On"
 set_config "files" "files_dir" "/var/www/ojs-files"
 
-# 2. Database Defaults (Mappable from simple names)
+# 2. Database Defaults
 set_config "database" "driver" "${OJS_DB_DRIVER:-postgres}"
 set_config "database" "host" "${OJS_DB_HOST}"
 set_config "database" "port" "${OJS_DB_PORT}"
@@ -41,17 +42,13 @@ set_config "database" "username" "${OJS_DB_USER}"
 set_config "database" "password" "${OJS_DB_PASSWORD}"
 set_config "database" "name" "${OJS_DB_NAME}"
 
-# 3. Dynamic Configuration via OJSCONFIG_ prefix (Case Sensitive Section/Key)
-# Format: OJSCONFIG_SECTION_KEY (e.g. OJSCONFIG_EMAIL_DEFAULT)
+# 3. Handle OJSCONFIG_ style variables
 for var in $(env | grep "^OJSCONFIG_"); do
     config_pair=${var#OJSCONFIG_}
     config_key_full=${config_pair%%=*}
     config_value=${config_pair#*=}
-    
     section=$(echo $config_key_full | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
     key=$(echo $config_key_full | cut -d'_' -f2- | tr '[:upper:]' '[:lower:]')
-    
-    # Value auto-quoting: Only avoid quotes for On/Off/true/false/Numbers
     if [[ "$config_value" =~ ^[0-9]+$ ]] || [[ "$config_value" =~ ^(On|Off|true|false)$ ]]; then
         set_config "$section" "$key" "$config_value"
     else
@@ -59,16 +56,13 @@ for var in $(env | grep "^OJSCONFIG_"); do
     fi
 done
 
-# 4. Handle PKP_CONF_ style variables (OJS standard)
-# Format: PKP_CONF_SECTION_KEY (e.g. PKP_CONF_GENERAL_BASE_URL)
+# 4. Handle PKP_CONF_ style variables
 for var in $(env | grep "^PKP_CONF_"); do
     config_pair=${var#PKP_CONF_}
     config_key_full=${config_pair%%=*}
     config_value=${config_pair#*=}
-    
     section=$(echo $config_key_full | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
     key=$(echo $config_key_full | cut -d'_' -f2- | tr '[:upper:]' '[:lower:]')
-    
     if [[ "$config_value" =~ ^[0-9]+$ ]] || [[ "$config_value" =~ ^(On|Off|true|false)$ ]]; then
         set_config "$section" "$key" "$config_value"
     else
@@ -76,8 +70,8 @@ for var in $(env | grep "^PKP_CONF_"); do
     fi
 done
 
-# 5. Fallback for OJS_BASE_URL handled via the loop above or manually if loop fails
-if [ -n "$OJS_BASE_URL" ] && [ -z "$PKP_CONF_GENERAL_BASE_URL" ]; then
+# 5. Fallback for OJS_BASE_URL (Ensure it's QUOTED)
+if [ -n "$OJS_BASE_URL" ]; then
     set_config "general" "base_url" "\"$OJS_BASE_URL\""
 fi
 

@@ -76,11 +76,18 @@ RUN mkdir -p /var/www/ojs-files \
     && chown -R www-data:www-data /var/www/html /var/www/ojs-files \
     && chmod -R 775 /var/www/html /var/www/ojs-files
 
-# Apache Configuration for OJS
+# Apache Configuration for OJS (Clean URLs and HTTPS)
 RUN printf "<Directory /var/www/html>\n\
     AllowOverride All\n\
     Options -MultiViews +FollowSymLinks\n\
     Require all granted\n\
+    <IfModule mod_rewrite.c>\n\
+    RewriteEngine On\n\
+    RewriteBase /\n\
+    RewriteCond %%{REQUEST_FILENAME} !-d\n\
+    RewriteCond %%{REQUEST_FILENAME} !-f\n\
+    RewriteRule ^(.*)$ index.php/\$1 [QSA,L]\n\
+    </IfModule>\n\
     </Directory>\n\
     SetEnvIf X-Forwarded-Proto \"^https$\" HTTPS=on\n" > /etc/apache2/conf-available/ojs.conf \
     && a2enconf ojs
