@@ -79,7 +79,7 @@ RUN mkdir -p /var/www/ojs-files \
 # Apache Configuration for OJS
 RUN printf "<Directory /var/www/html>\n\
     AllowOverride All\n\
-    Options Indexes FollowSymLinks\n\
+    Options -MultiViews +FollowSymLinks\n\
     Require all granted\n\
     </Directory>\n\
     SetEnvIf X-Forwarded-Proto \"^https$\" HTTPS=on\n" > /etc/apache2/conf-available/ojs.conf \
