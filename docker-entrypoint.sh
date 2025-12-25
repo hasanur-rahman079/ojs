@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Debug: Show inherited environment (filtered for OJS)
+# Debug: Show inherited environment (filtered)
 echo "--- Environment Check ---"
 env | grep -E "^(OJS|PKP|OJSCONFIG)_" | grep -iv "PASSWORD" || true
 echo "--------------------------"
@@ -20,7 +20,6 @@ set_config() {
     if [ -n "$value" ]; then
         echo "Configuring [$section] $key = $value"
         # Search for the key in the specific section and replace it
-        # Handles both commented and uncommented lines
         sed -i "/^\[$section\]/,/^\[/ s|^;*[[:space:]]*$key[[:space:]]*=.*|$key = $value|" config.inc.php
     fi
 }
@@ -28,8 +27,8 @@ set_config() {
 # 1. Force Post-Install Mode and Clean URLs
 set_config "general" "installed" "On"
 set_config "general" "restful_urls" "On"
-set_config "general" "display_errors" "Off"
-set_config "general" "show_stacktrace" "Off"
+set_config "general" "display_errors" "On"
+set_config "general" "show_stacktrace" "On"
 set_config "general" "trust_x_forwarded_for" "On"
 
 # 2. Essential Security/Proxy Defaults
@@ -47,24 +46,24 @@ set_config "database" "name" "${OJS_DB_NAME}"
 # 4. Files Mapping
 set_config "files" "files_dir" "/var/www/ojs-files"
 
-# 5. Base URL (Needs quotes in OJS)
+# 5. Base URL
 if [ -n "$OJS_BASE_URL" ]; then
     set_config "general" "base_url" "\"$OJS_BASE_URL\""
 fi
 
-# 6. Dynamic Configuration via OJSCONFIG_ prefix (Case Sensitive Section/Key)
-# Format: OJSCONFIG_SECTION_KEY (e.g. OJSCONFIG_EMAIL_SMTP_SERVER)
-# We use a custom parser to handle underscores in section names if needed
+# 6. Dynamic Configuration via OJSCONFIG_ prefix
+# Correctly parses SECTION_KEY (e.g. OJSCONFIG_EMAIL_DEFAULT)
+# We use export to read them reliably in the loop
 for var in $(env | grep "^OJSCONFIG_"); do
     config_pair=${var#OJSCONFIG_}
     config_key_full=${config_pair%%=*}
     config_value=${config_pair#*=}
     
-    # Simple split at the first underscore for section
+    # Split at the first underscore
     section=$(echo $config_key_full | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
     key=$(echo $config_key_full | cut -d'_' -f2- | tr '[:upper:]' '[:lower:]')
     
-    # If the key is just numbers or basic text, don't quote. Otherwise quote.
+    # Value auto-quoting: Only avoid quotes for On/Off/true/false/Numbers
     if [[ "$config_value" =~ ^[0-9]+$ ]] || [[ "$config_value" =~ ^(On|Off|true|false)$ ]]; then
         set_config "$section" "$key" "$config_value"
     else
