@@ -27,8 +27,8 @@ set_config() {
 # 1. Base Defaults (Inject these first)
 set_config "general" "installed" "On"
 set_config "general" "restful_urls" "On"
-set_config "general" "display_errors" "On"
-set_config "general" "show_stacktrace" "On"
+set_config "general" "display_errors" "Off"
+set_config "general" "show_stacktrace" "Off"
 set_config "general" "trust_x_forwarded_for" "On"
 set_config "security" "force_ssl" "On"
 set_config "security" "force_login_ssl" "On"
@@ -37,7 +37,7 @@ set_config "files" "files_dir" "/var/www/ojs-files"
 # 2. Database Defaults
 set_config "database" "driver" "${OJS_DB_DRIVER:-postgres}"
 set_config "database" "host" "${OJS_DB_HOST}"
-set_config "database" "port" "${OJS_DB_PORT}"
+set_config "database" "port" "${OJS_DB_PORT:-5432}"
 set_config "database" "username" "${OJS_DB_USER}"
 set_config "database" "password" "${OJS_DB_PASSWORD}"
 set_config "database" "name" "${OJS_DB_NAME}"
@@ -56,7 +56,16 @@ for var in $(env | grep "^OJSCONFIG_"); do
     fi
 done
 
-# 4. Handle PKP_CONF_ style variables
+# 4. Anti-Spam / DMARC Compliance (Apply if email username is present)
+if [ -n "$OJSCONFIG_EMAIL_SMTP_USERNAME" ]; then
+    echo "Applying Anti-Spam / DMARC Compliance settings..."
+    set_config "email" "allow_envelope_sender" "On"
+    set_config "email" "default_envelope_sender" "\"$OJSCONFIG_EMAIL_SMTP_USERNAME\""
+    set_config "email" "force_default_envelope_sender" "On"
+    set_config "email" "force_dmarc_compliant_from" "On"
+fi
+
+# 5. Handle PKP_CONF_ style variables
 for var in $(env | grep "^PKP_CONF_"); do
     config_pair=${var#PKP_CONF_}
     config_key_full=${config_pair%%=*}
@@ -70,19 +79,19 @@ for var in $(env | grep "^PKP_CONF_"); do
     fi
 done
 
-# 5. Fallback for OJS_BASE_URL (Ensure it's QUOTED)
-if [ -n "$OJS_BASE_URL" ]; then
+# 6. Fallback for OJS_BASE_URL (Ensure it's QUOTED)
+if [ -n "$OJS_BASE_URL" ] && [ -z "$PKP_CONF_GENERAL_BASE_URL" ]; then
     set_config "general" "base_url" "\"$OJS_BASE_URL\""
 fi
 
-# 6. Generate APP_KEY if it's empty
+# 7. Generate APP_KEY if it's empty
 if [ -z "$(grep "app_key =" config.inc.php | cut -d'=' -f2 | xargs)" ]; then
     APP_KEY=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32)
     echo "Generated new app_key"
     sed -i "s/app_key =.*/app_key = $APP_KEY/" config.inc.php
 fi
 
-# 7. Fix permissions for runtime
+# 8. Fix permissions for runtime
 chown -R www-data:www-data /var/www/html /var/www/ojs-files public/ plugins/ cache/
 chmod -R 775 /var/www/html /var/www/ojs-files public/ plugins/ cache/
 
