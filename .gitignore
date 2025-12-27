@@ -22,4 +22,5 @@ cypress/screenshots/
 .phpunit.result.cache
 /plugins/themes/default/js/lib/swiper/
 registry/uiLocaleKeysBackend.json
-.env_dokploycache/
+.env_dokploy
+cache/

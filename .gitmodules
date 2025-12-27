@@ -60,3 +60,15 @@
 	path = plugins/generic/pflPlugin
 	url = https://github.com/pkp/pflPlugin
 	branch = stable-3_5_0
+[submodule "plugins/generic/emspubcore"]
+	path = plugins/generic/emspubcore
+	url = https://github.com/hasanur-rahman079/emspubcore.git
+[submodule "plugins/generic/discountedFee"]
+	path = plugins/generic/discountedFee
+	url = https://github.com/hasanur-rahman079/discountedFee.git
+[submodule "plugins/paymethod/emspubstripe"]
+	path = plugins/paymethod/emspubstripe
+	url = https://github.com/hasanur-rahman079/emspubstripe.git
+[submodule "plugins/themes/emsDefaultManuscript"]
+	path = plugins/themes/emsDefaultManuscript
+	url = https://github.com/hasanur-rahman079/emsDefaultManuscript.git
