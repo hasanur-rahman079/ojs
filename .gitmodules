@@ -72,3 +72,6 @@
 [submodule "plugins/themes/emsDefaultManuscript"]
 	path = plugins/themes/emsDefaultManuscript
 	url = https://github.com/hasanur-rahman079/emsDefaultManuscript.git
+[submodule "plugins/generic/s3ojs"]
+	path = plugins/generic/s3ojs
+	url = git@github.com:hasanur-rahman079/s3ojs.git
