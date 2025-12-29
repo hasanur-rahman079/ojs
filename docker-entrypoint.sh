@@ -12,19 +12,41 @@ if [ ! -f config.inc.php ]; then
     cp config.TEMPLATE.inc.php config.inc.php
 fi
 
-# Function to update OJS config
 set_config() {
-    local section=$1
-    local key=$2
-    local value=$3
+    local section="$1"
+    local key="$2"
+    local value="$3"
     if [ -n "$value" ]; then
         echo "Configuring [$section] $key = $value"
-        # If value is not already quoted and is not a number/boolean, wrap in quotes
-        if [[ ! "$value" =~ ^['"].*['"]$ ]] && [[ ! "$value" =~ ^[0-9]+$ ]] && [[ ! "$value" =~ ^(On|Off|true|false)$ ]]; then
+        
+        # Check if value needs quotes (not a number, not a boolean, not already quoted)
+        local needs_quotes=1
+        
+        # 1. Check if already quoted
+        case "$value" in
+            \"*\"|\'*\') needs_quotes=0 ;;
+        esac
+        
+        # 2. Check if a number
+        if [ "$needs_quotes" -eq 1 ]; then
+            case "$value" in
+                *[!0-9]*) ;;
+                *) needs_quotes=0 ;;
+            esac
+        fi
+        
+        # 3. Check if a boolean
+        if [ "$needs_quotes" -eq 1 ]; then
+            case "$value" in
+                On|Off|true|false) needs_quotes=0 ;;
+            esac
+        fi
+
+        if [ "$needs_quotes" -eq 1 ]; then
             value="\"$value\""
         fi
-        # Handles both commented and uncommented lines, more robust section matching
-        # We look for the section, then search for the key until the next section
+
+        # Handles both commented and uncommented lines
         sed -i "/^\[$section\]/,/^\[/ s|^;*[[:space:]]*$key[[:space:]]*=.*|$key = $value|" config.inc.php
     fi
 }
