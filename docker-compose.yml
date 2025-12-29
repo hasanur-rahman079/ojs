@@ -33,6 +33,15 @@ services:
       - OJSCONFIG_EMAIL_SMTP_USERNAME
       - OJSCONFIG_EMAIL_SMTP_PASSWORD
 
+      # Missing Configuration Variables
+      - OJSCONFIG_GENERAL_ALLOWED_HOSTS
+      - OJSCONFIG_SECURITY_SALT
+      - OJSCONFIG_SECURITY_API_KEY_SECRET
+      - OJSCONFIG_EMAIL_DMARC_COMPLIANT_FROM_DISPLAYNAME
+      - OJSCONFIG_EMAIL_REQUIRE_VALIDATION
+      - OJSCONFIG_SCHEDULE_TASK_RUNNER
+      - OJSCONFIG_OAI_REPOSITORY_ID
+
     volumes:
       - ojs_public:/var/www/html/public
       - ojs_private:/var/www/ojs-files
