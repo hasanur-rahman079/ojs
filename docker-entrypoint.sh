@@ -19,7 +19,12 @@ set_config() {
     local value=$3
     if [ -n "$value" ]; then
         echo "Configuring [$section] $key = $value"
-        # Handles both commented and uncommented lines
+        # If value is not already quoted and is not a number/boolean, wrap in quotes
+        if [[ ! "$value" =~ ^['"].*['"]$ ]] && [[ ! "$value" =~ ^[0-9]+$ ]] && [[ ! "$value" =~ ^(On|Off|true|false)$ ]]; then
+            value="\"$value\""
+        fi
+        # Handles both commented and uncommented lines, more robust section matching
+        # We look for the section, then search for the key until the next section
         sed -i "/^\[$section\]/,/^\[/ s|^;*[[:space:]]*$key[[:space:]]*=.*|$key = $value|" config.inc.php
     fi
 }
@@ -53,19 +58,16 @@ env | grep "^OJSCONFIG_" | while read -r var_line; do
     section=$(echo "$config_key_full" | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
     key=$(echo "$config_key_full" | cut -d'_' -f2- | tr '[:upper:]' '[:lower:]')
     
-    # Don't quote if it looks like a boolean or number
-    if [[ "$config_value" =~ ^[0-9]+$ ]] || [[ "$config_value" =~ ^(On|Off|true|false)$ ]]; then
-        set_config "$section" "$key" "$config_value"
-    else
-        # For strings and JSON, ensure they are quoted correctly for .ini format
-        # If already starts with a quote, use as is, else wrap in double quotes
-        if [[ "$config_value" == \"*\" ]] || [[ "$config_value" == \'*\' ]]; then
-            set_config "$section" "$key" "$config_value"
-        else
-            set_config "$section" "$key" "\"$config_value\""
-        fi
-    fi
+    set_config "$section" "$key" "$config_value"
 done
+
+# 3.1 Explicit Overrides for critical settings (ensure they are applied)
+set_config "general" "allowed_hosts" "${OJSCONFIG_GENERAL_ALLOWED_HOSTS}"
+set_config "security" "salt" "${OJSCONFIG_SECURITY_SALT}"
+set_config "security" "api_key_secret" "${OJSCONFIG_SECURITY_API_KEY_SECRET}"
+set_config "email" "dmarc_compliant_from_displayname" "${OJSCONFIG_EMAIL_DMARC_COMPLIANT_FROM_DISPLAYNAME}"
+set_config "email" "require_validation" "${OJSCONFIG_EMAIL_REQUIRE_VALIDATION}"
+set_config "schedule" "task_runner" "${OJSCONFIG_SCHEDULE_TASK_RUNNER}"
 
 # 4. Anti-Spam / DMARC Compliance (Apply if email username is present)
 if [ -n "$OJSCONFIG_EMAIL_SMTP_USERNAME" ]; then
@@ -85,15 +87,7 @@ env | grep "^PKP_CONF_" | while read -r var_line; do
     section=$(echo "$config_key_full" | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
     key=$(echo "$config_key_full" | cut -d'_' -f2- | tr '[:upper:]' '[:lower:]')
     
-    if [[ "$config_value" =~ ^[0-9]+$ ]] || [[ "$config_value" =~ ^(On|Off|true|false)$ ]]; then
-        set_config "$section" "$key" "$config_value"
-    else
-        if [[ "$config_value" == \"*\" ]] || [[ "$config_value" == \'*\' ]]; then
-            set_config "$section" "$key" "$config_value"
-        else
-            set_config "$section" "$key" "\"$config_value\""
-        fi
-    fi
+    set_config "$section" "$key" "$config_value"
 done
 
 # 6. Fallback for OJS_BASE_URL (Ensure it's QUOTED)
