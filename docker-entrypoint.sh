@@ -43,16 +43,27 @@ set_config "database" "password" "${OJS_DB_PASSWORD}"
 set_config "database" "name" "${OJS_DB_NAME}"
 
 # 3. Handle OJSCONFIG_ style variables
-for var in $(env | grep "^OJSCONFIG_"); do
-    config_pair=${var#OJSCONFIG_}
+env | grep "^OJSCONFIG_" | while read -r var_line; do
+    # var_line is "OJSCONFIG_SECTION_KEY=value"
+    config_pair=${var_line#OJSCONFIG_}
     config_key_full=${config_pair%%=*}
     config_value=${config_pair#*=}
-    section=$(echo $config_key_full | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
-    key=$(echo $config_key_full | cut -d'_' -f2- | tr '[:upper:]' '[:lower:]')
+    
+    # Section is the first part, Key is everything else
+    section=$(echo "$config_key_full" | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
+    key=$(echo "$config_key_full" | cut -d'_' -f2- | tr '[:upper:]' '[:lower:]')
+    
+    # Don't quote if it looks like a boolean or number
     if [[ "$config_value" =~ ^[0-9]+$ ]] || [[ "$config_value" =~ ^(On|Off|true|false)$ ]]; then
         set_config "$section" "$key" "$config_value"
     else
-        set_config "$section" "$key" "\"$config_value\""
+        # For strings and JSON, ensure they are quoted correctly for .ini format
+        # If already starts with a quote, use as is, else wrap in double quotes
+        if [[ "$config_value" =~ ^['"].*['"]$ ]]; then
+            set_config "$section" "$key" "$config_value"
+        else
+            set_config "$section" "$key" "\"$config_value\""
+        fi
     fi
 done
 
@@ -66,16 +77,22 @@ if [ -n "$OJSCONFIG_EMAIL_SMTP_USERNAME" ]; then
 fi
 
 # 5. Handle PKP_CONF_ style variables
-for var in $(env | grep "^PKP_CONF_"); do
-    config_pair=${var#PKP_CONF_}
+env | grep "^PKP_CONF_" | while read -r var_line; do
+    config_pair=${var_line#PKP_CONF_}
     config_key_full=${config_pair%%=*}
     config_value=${config_pair#*=}
-    section=$(echo $config_key_full | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
-    key=$(echo $config_key_full | cut -d'_' -f2- | tr '[:upper:]' '[:lower:]')
+    
+    section=$(echo "$config_key_full" | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
+    key=$(echo "$config_key_full" | cut -d'_' -f2- | tr '[:upper:]' '[:lower:]')
+    
     if [[ "$config_value" =~ ^[0-9]+$ ]] || [[ "$config_value" =~ ^(On|Off|true|false)$ ]]; then
         set_config "$section" "$key" "$config_value"
     else
-        set_config "$section" "$key" "\"$config_value\""
+        if [[ "$config_value" =~ ^['"].*['"]$ ]]; then
+            set_config "$section" "$key" "$config_value"
+        else
+            set_config "$section" "$key" "\"$config_value\""
+        fi
     fi
 done
 
