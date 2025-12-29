@@ -73,6 +73,9 @@ set_config "general" "restful_urls" "On"
 set_config "general" "display_errors" "Off"
 set_config "general" "show_stacktrace" "Off"
 set_config "general" "trust_x_forwarded_for" "On"
+set_config "security" "force_ssl" "On"
+set_config "security" "force_login_ssl" "On"
+set_config "files" "files_dir" "/var/www/ojs-files"
 
 set_config "database" "driver" "${OJS_DB_DRIVER:-postgres}"
 set_config "database" "host" "${OJS_DB_HOST}"
@@ -106,6 +109,30 @@ set_config "email" "dmarc_compliant_from_displayname" "$OJSCONFIG_EMAIL_DMARC_CO
 set_config "email" "require_validation" "$OJSCONFIG_EMAIL_REQUIRE_VALIDATION"
 set_config "schedule" "task_runner" "$OJSCONFIG_SCHEDULE_TASK_RUNNER"
 set_config "oai" "repository_id" "$OJSCONFIG_OAI_REPOSITORY_ID"
+
+# 5.1 Anti-Spam / DMARC Compliance (Automatically enable if SMTP username is present)
+if [ -n "$OJSCONFIG_EMAIL_SMTP_USERNAME" ]; then
+    echo "--- Applying Automatic Anti-Spam / DMARC Compliance ---"
+    set_config "email" "allow_envelope_sender" "On"
+    set_config "email" "default_envelope_sender" "$OJSCONFIG_EMAIL_SMTP_USERNAME"
+    set_config "email" "force_default_envelope_sender" "On"
+    set_config "email" "force_dmarc_compliant_from" "On"
+fi
+
+# 5.2 Handle PKP_CONF_ style variables (Standard PKP convention)
+echo "--- Processing PKP_CONF_ variables ---"
+env | grep "^PKP_CONF_" > /tmp/pkp_env_vars || true
+while read -r var_line; do
+    [ -z "$var_line" ] && continue
+    clean_line=${var_line#PKP_CONF_}
+    key_part=${clean_line%%=*}
+    val_part=${clean_line#*=}
+    
+    section=$(echo "$key_part" | cut -d'_' -f1 | tr '[:upper:]' '[:lower:]')
+    key=$(echo "$key_part" | cut -d'_' -f2- | tr '[:upper:]' '[:lower:]')
+    
+    set_config "$section" "$key" "$val_part"
+done < /tmp/pkp_env_vars
 
 # --- 6. CLEANUP & PERMISSIONS ---
 # Generate APP_KEY if empty
