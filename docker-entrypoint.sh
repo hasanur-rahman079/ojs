@@ -59,7 +59,7 @@ env | grep "^OJSCONFIG_" | while read -r var_line; do
     else
         # For strings and JSON, ensure they are quoted correctly for .ini format
         # If already starts with a quote, use as is, else wrap in double quotes
-        if [[ "$config_value" =~ ^['"].*['"]$ ]]; then
+        if [[ "$config_value" == \"*\" ]] || [[ "$config_value" == \'*\' ]]; then
             set_config "$section" "$key" "$config_value"
         else
             set_config "$section" "$key" "\"$config_value\""
@@ -88,7 +88,7 @@ env | grep "^PKP_CONF_" | while read -r var_line; do
     if [[ "$config_value" =~ ^[0-9]+$ ]] || [[ "$config_value" =~ ^(On|Off|true|false)$ ]]; then
         set_config "$section" "$key" "$config_value"
     else
-        if [[ "$config_value" =~ ^['"].*['"]$ ]]; then
+        if [[ "$config_value" == \"*\" ]] || [[ "$config_value" == \'*\' ]]; then
             set_config "$section" "$key" "$config_value"
         else
             set_config "$section" "$key" "\"$config_value\""
