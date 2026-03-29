@@ -43,7 +43,8 @@
 	url = https://github.com/pkp/googleScholar
 [submodule "plugins/generic/crossref"]
 	path = plugins/generic/crossref
-	url = https://github.com/pkp/crossref-ojs
+	url = https://github.com/hasanur-rahman079/crossref-ojs
+	branch = stable-3_5_0-ems
 [submodule "plugins/generic/webFeed"]
 	path = plugins/generic/webFeed
 	url = https://github.com/pkp/webFeed.git
