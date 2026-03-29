@@ -163,7 +163,6 @@
 				</section>
 			{/if}
 
-
 			{* Keywords *}
 			{if !empty($publication->getLocalizedData('keywords'))}
 			<section class="item keywords">
@@ -173,7 +172,7 @@
 				</h2>
 				<span class="value">
 					{foreach name="keywords" from=$publication->getLocalizedData('keywords') item="keyword"}
-						{$keyword|escape}{if !$smarty.foreach.keywords.last}{translate key="common.commaListSeparator"}{/if}
+						{$keyword.name|escape}{if !$smarty.foreach.keywords.last}{translate key="common.commaListSeparator"}{/if}					
 					{/foreach}
 				</span>
 			</section>
@@ -245,13 +244,13 @@
 			{/if}
 
 			{* References *}
-			{if $parsedCitations || (string) $publication->getData('citationsRaw')}
+			{if count($parsedCitations) || (string) $publication->getData('citationsRaw')}
 				<section class="item references">
 					<h2 class="label">
 						{translate key="submission.citations"}
 					</h2>
 					<div class="value">
-						{if $parsedCitations}
+						{if count($parsedCitations)}
 							{foreach from=$parsedCitations item="parsedCitation"}
 								<p>{$parsedCitation->getCitationWithLinks()|strip_unsafe_html} {call_hook name="Templates::Article::Details::Reference" citation=$parsedCitation}</p>
 							{/foreach}
