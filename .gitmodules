@@ -76,6 +76,3 @@
 [submodule "plugins/generic/s3ojs"]
 	path = plugins/generic/s3ojs
 	url = https://github.com/hasanur-rahman079/s3ojs.git
-[submodule "plugins/paymethod/emspubpaddle"]
-	path = plugins/paymethod/emspubpaddle
-	url = https://github.com/hasanur-rahman079/emspubpaddle.git
