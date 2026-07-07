@@ -1,8 +1,8 @@
-OJS 3.5.0 Release Notes
-Git tag: 3_5_0-3
+OJS 3.5.0 LTS Release Notes
+Git tag: 3_5_0-5
 
-Release date: December 19, 2025
-===============================
+Release date: June 30, 2026
+===========================
 
 Configuration Changes
 ---------------------
@@ -16,6 +16,8 @@ In the [general] section:
 In the [security] section:
     - cipher: Algorithm used to generate app key and encryption purpose
     - cookie_encryption: Allow cookie encryption when set
+    - session_expire_on_close (default value: Off): expire cookie-based sessions upon closing the browser window.
+    - remember_me_lifetime (default value: 30): Number of days the "remember me" persistent-login cookie remains valid.
 
 In the newly added [schedule] section:
     - task_runner (default value: On): Whether or not to run the schedule tasks through the web based task runner
@@ -24,10 +26,114 @@ In the newly added [schedule] section:
 
 In [queues]:
     - process_jobs_at_task_scheduler (default value: Off): Controls whether queued jobs should be executed together with the scheduled tasks.
+    - job_runner_cross_request_lock (default value: On): Prevent multiple web requests from running JobRunner simultaneously.
 
 In [cache]:
     - default (default value: 'file'). Can be either 'file' or 'opcache' to indicate which Laravel cache should be used.
     - path (default value: 'cache/opcache'). Use to specify a path for cache storage when using 'file' or 'opcache' drivers.
+
+3.5.0-5 Build (LTS)
+-------------------
+	#3477: Permit editors to see competing interests for declining reviewers
+	#10371: Date input parameters in article search must be checked for validity
+	#10971: Users XML plugin | Export - missing username in user selection
+	#11947: [Users & Roles] | Roles Pagination - Roles, with 25 items per page selected and 27 roles it shows only 25 items and no pagination
+	#11999: [Jobs] | Job runner doesn't retry failed jobs properly
+	#12005: [DOI] | Issue always required for legacy DOI suffix pattern
+	#12031: Review and update swagger API docs for 3.5
+	#12133: [Upgrade] | Invalid category order direction value after upgrading from 3.3 to 3.5
+	#12140: Back port decision lost solution for 3.4 which introduced for 3.5/main upgrade
+	#12217: [Submission Decisions] | Submission workflow - Submission page, reviewers & authors who have disabled status throw errors when recording a decision
+	#12250: [Main Feature] | ORCID verification request email fails if no user matching context contactEmail
+	#12461: Align UI text in section/series settings: "Inactive" vs "Deactivate"
+	#12501: Add a CLI tool for marking locale keys as fuzzy
+	#12513: [User invitation] | site locales needs to be consider when creating new user via invitation workflow
+	#12547: [pkp-lib] | Session/cookie management
+	#12565: [Editorial Masthead] | Display masthead, unable to access masthead in postgres installations
+	#12567: [Datacite Plugin] | Registering issue DOI with DataCite not possible in OJS 3.5.0-3
+	#12588: Upgrade laravel version from 11.x to 12.x
+	#12604: [Publication Object Metadata] | Passing array instead of string for supportingAgencies causes fatal error for plugin DublinCoreMeta
+	#12608: [OJS 3.5] The one-click configuration that allows reviewer to access a submission expires after the reviewer click on it for the first time.
+	#12632: [ORCID] | UserRequiredPolicy missing from OrcidHandler
+	#12637: [DOI] | Null custom suffix pattern causes TypeError in mintPublicationDoi when Submissions pattern field is blank
+	#12658: [Eloquent Model] | Passing empty array does not removed existing setting values for eloquent based model with settings table
+	#12712: [Eloquent Model] ModelWithSettings: schema-derived cast silently skipped for multi-word camelCase setting props
+	#12731: fix: incorrect empty check on LazyCollection returned by publication->getData('citations')
+	#12734: [Native Import/Export Plugin] | Publication export, validation errors when certain metadata entered
+	#12737: Indirect direct object reference in DOI assignment
+	#12766: Submission Lists | Some submissions do not appear in author's "Revisions Requested" queue
+	#12767: base_url[journal] with bare domain causes //api/v1/ double-slash on all API calls in OJS 3.5
+	#12783: [Admin Settings] | Editorial Workflow Admin - Settings Wizard > User, the option to remove user fails to be hidden after no roles are available for the user.
+	#12792: [Emails] | User invitation email: Accept/Decline buttons invisible in Outlook (white-on-white)
+	#12795: [Recommend Only Editor | Editorial Workflow Section - Submission in Review, Recommend options are going to 404 error page when selected
+	#12833: [ScheduleTask] | Fatal non-recoverable error for web based task runner at invalid request path which unable to resolve context
+	#12879: [Email Footer] | Reviewer Workflow discussions - Email, part of the email footer discussion exposes author information
+	#12883: [Datacite plugin] | Datacite plugin settings, Test username validation is incorrect
+	#12886: [DOI] | Production - When uploading an article in OJS 3.5 with QuickSubmit, empty author affiliation prevents DOI registration
+	#12944: [Users & Roles] | Editorial Workflow Section - Users & Roles Settings > Roles Page, Search functionality with dropdown to filter List Roles Assigned To is throwing a 500 error
+	#12951: [API keys] | Increase entropy of API key creation
+	#12967: Users cannot submit if they have multiple roles assigned on some servers
+	#12973: Reviewer suggestion API does not correlate submissions with suggestions
+	#12975: Email log entry API does not ensure context matches request
+	#12977: Disable external XML entity loading
+
+
+3.5.0-4 Build
+-------------
+    pkp/credit#4: Update credit-translation to lastest version
+    pkp/pkp-lib#10463: [OJS 3.4] The email "A new submission needs an editor to be assigned" is not available in the email template list
+    pkp/pkp-lib#10496: Null pointer in the Editorial Reminder if the user has blocked notifications
+    pkp/pkp-lib#10862: Context menu of TinyMCE is overriding the default context menu
+    pkp/pkp-lib#11557: Centralise the publication's object metadata structure
+    pkp/pkp-lib#11645: Upgrade process interrupted due to invalid context IDs at the access_keys table
+    pkp/pkp-lib#11758: [Upgrade to >= 3.4] | I8866_DispatchRegionCodesFixingJobs - FixRegionCodes Job
+    pkp/pkp-lib#11760: When errors occur while submitting a review, the way OJS displays errors is misleading.
+    pkp/pkp-lib#11800: Allow manager to edit user setting Appear on the masthead
+    pkp/pkp-lib#11803: User invitation email modifications are lost
+    pkp/pkp-lib#11850: [Select Reviewer] | Workflow Section - Selecting a new Reviewer modal, affiliation and orcid do not wrap
+    pkp/pkp-lib#11894: [Front-office] | Issue galley, download links displays red Icon with closed lock but the file is downloadable
+    pkp/pkp-lib#12024: [Eloquent] | Saving arrays to settings tables with Eloquent breaks the values
+    pkp/pkp-lib#12050: Custom API endpoint for plugins
+    pkp/pkp-lib#12060: [Discussion Boards] | Any Workflow Section - Cannot reorder discussions
+    pkp/pkp-lib#12089: [JATS Template] | Handle missing Journal Abbreviation in JATS export
+    pkp/pkp-lib#12134: [UI Library] | Unable to modify format options in FieldRichText.vue (one line rich text field)
+    pkp/pkp-lib#12140: Back port decision lost solution for 3.4 which introduced for 3.5/main upgrade
+    pkp/pkp-lib#12154: Check ROR API response handling
+    pkp/pkp-lib#12173: [Citations] | Publication Metadata - references fields, cannot be saved when empty
+    pkp/pkp-lib#12182: Crossref plugin uppercases names when it should not
+    pkp/pkp-lib#12188: Get the latest ROR registry version in a different way
+    pkp/pkp-lib#12189: Update counterBots submodule
+    pkp/pkp-lib#12265: PHP fatal error when downloading review
+    pkp/pkp-lib#12273: [UI Navigation] | Review Workflow - Previous Review round, several navigation elements are unclickable
+    pkp/pkp-lib#12287: [SUSHI API] | JSON and TSV response
+    pkp/pkp-lib#12291: Hooks | $issueId parameter missing from call to IssueAction::subscribedDomain
+    pkp/pkp-lib#12293: Improve submission list performance
+    pkp/pkp-lib#12309: Authors cannot access workflow on some servers
+    pkp/pkp-lib#12332: Account Invites - Microsoft auto declines invitations
+    pkp/pkp-lib#12349: [Editorial Workflow] | Galley file allow unintended revision upload of past files
+    pkp/pkp-lib#12360: [Users] | Editing user profile - Identity, Family name is set to uppercase
+    pkp/pkp-lib#12369: Fatal error on missing function withJson when viewing statistics
+    pkp/pkp-lib#12374: [Users & Roles] | Invite new user - Email link redirect new user, with Site Access options setting for users who must be registered enabled user cannot be registered
+    pkp/pkp-lib#12396: VersionCheck::checkIfNewVersionExists() fires HTTP request even when show_upgrade_warning is Off
+    pkp/pkp-lib#12404: [Reader-ui] | iFrames on content pages get sandboxed by tinyMCE
+    pkp/pkp-lib#12436: [Privacy Consent] | Reviewer's Page, Privacy Consent checkbox hidden by browser content blockers (Brave Shields, Safari)
+    pkp/pkp-lib#12446: Improve ROR dataset update: check schema version, use JSON, improve error reporting, remove temporary table, schedule monthly
+    pkp/pkp-lib#12453: [Metadata Defaults] | Enhancements to our current metadata defaults (Part 1 - Easy wins)
+    pkp/pkp-lib#12468: Allow for plugin gallery source to be extended/overridden
+    pkp/pkp-lib#12476: [ORCID] | Auth tokens not transfered from user to author
+    pkp/pkp-lib#12484: pkp/pkp-lib#12374 Fix issue preventing users from accepting invitations while logged out by taslangraham
+    pkp/pkp-lib#12489: [Plugins] Provide good example/docs for Plugin Settings in Vue.js + API
+    pkp/pkp-lib#12493: [Reviewer Suggestion] Locales to render & validate form does not match
+    pkp/pkp-lib#12496: pkp/pkp-lib#11760 Add client side validations for reviewer custom forms by nibou230
+    pkp/pkp-lib#12497: [Main Feature] | Workflow Section - Recommend only option
+    pkp/pkp-lib#12523: Few type fixes
+    pkp/pkp-lib#12532: Enhancement of Queue JobRunner
+    pkp/pkp-lib#12538: [User Invitation] | Inviting user sets NULL for empty fields and causes error on change of site primary locale
+    pkp/pkp-lib#12540: [Forms] Improve multilingual behaviour of old & current forms
+    pkp/pkp-lib#5836: Long filenames with no spaces push content off of editorial history modal
+    pkp/pkp-lib#6682: Enabling Clockss and Lockss does not add license in About the Journal page
+    pkp/pkp-lib#7161: [Website Settings] | Appearance, Make obtaining Journal Style Sheet easier
+
 
 3.5.0-3 Build
 -------------

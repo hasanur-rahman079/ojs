@@ -3,15 +3,15 @@
 <!--
   * dbscripts/xml/upgrade.xml
   *
-  * Copyright (c) 2014-2025 Simon Fraser University
-  * Copyright (c) 2003-2025 John Willinsky
+  * Copyright (c) 2014-2026 Simon Fraser University
+  * Copyright (c) 2003-2026 John Willinsky
   * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
   *
   * Upgrade descriptor file.
   *
   -->
 
-<install version="3.5.0.3">
+<install version="3.5.0.5">
 	<code function="checkPhpVersion" />
 
 	<upgrade minversion="2.0.0.0" maxversion="3.2.9.9">
@@ -103,7 +103,7 @@
 	<upgrade minversion="3.3.0.0" maxversion="3.3.9.9">
 		<migration class="PKP\migration\upgrade\v3_4_0\I7249_UpdateUsersUniqueIndex"/>
 	</upgrade>
-	
+
 	<upgrade minversion="3.1.0.0" maxversion="3.4.0.1">
 		<migration class="PKP\migration\upgrade\v3_4_0\I9136_MigrateUniqueSiteId"/>
 		<migration class="APP\migration\upgrade\v3_4_0\I9231_FixMetricsIndexes"/>
@@ -125,10 +125,6 @@
 	<upgrade minversion="3.4.0.0" maxversion="3.4.9.9">
 		<migration class="APP\migration\upgrade\v3_4_0\I9813_QuickSubmitSubmissionProgressType"/>
 		<migration class="APP\migration\upgrade\v3_5_0\I11241_MissingDecisionConstantsUpdate"/>
-	</upgrade>
-
-	<upgrade minversion="3.5.0.0" maxversion="3.5.9.9">
-		<migration class="PKP\migration\upgrade\v3_5_0\I10962_UpdateEmailTemplateVariables"/>
 	</upgrade>
 
 	<upgrade minversion="3.1.0.0" maxversion="3.4.9.9">
@@ -178,16 +174,21 @@
 		<migration class="APP\migration\upgrade\v3_5_0\I10659_UpdateCrossrefSchema"/>
 		<migration class="APP\migration\upgrade\v3_5_0\I11125_UpdateEmailTemplateVariables"/>
 		<migration class="PKP\migration\upgrade\v3_5_0\I10962_UpdateEmailTemplateVariables"/>
+		<migration class="PKP\migration\upgrade\v3_5_0\I12133_FixCategorySort"/>
 		<code function="downloadIPGeoDB" />
 		<note file="docs/release-notes/README-3.5.0" />
 	</upgrade>
 
-	<upgrade minversion="3.5.0.0" maxversion="3.5.0.1">
+	<upgrade minversion="3.5.0.0" maxversion="3.5.0.99">
+		<migration class="PKP\migration\upgrade\v3_5_0\I10962_UpdateEmailTemplateVariables"/>
 		<migration class="PKP\migration\upgrade\v3_5_0\I11603_AddMissingUserRoleAssignmentInvitationEmail"/>
-	</upgrade>
-
-	<upgrade minversion="3.5.0.0" maxversion="3.5.0.2">
 		<migration class="PKP\migration\upgrade\v3_5_0\I11673_AddMissingApprovalToReviewerSuggestion"/>
+		<migration class="APP\migration\upgrade\v3_5_0\I12357_FixDecisionConstantsMissedStageId"/>
+		<migration class="PKP\migration\upgrade\v3_5_0\I11800_AddUserRoleMastheadUpdateEmail"/>
+		<migration class="PKP\migration\upgrade\v3_5_0\I12608_RestoreActiveReviewerInvitations"/>
+		<migration class="PKP\migration\upgrade\v3_5_0\I12513_MissingSiteLocaleUserNames"/>
+		<migration class="PKP\migration\upgrade\v3_5_0\I12133_FixCategorySort"/>
+		<migration class="PKP\migration\upgrade\v3_5_0\I12792_FixInvitationEmailButtons"/>
 	</upgrade>
 
 	<!-- update plugin configuration - should be done as the final upgrade task -->
