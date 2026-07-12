@@ -12,6 +12,7 @@ I am using this as a managed hosted platform for multiple journal at my own host
   - `plugins/generic/emsapi` — REST API for the Next.js Editorial Management System frontend
   - `plugins/generic/s3ojs` — S3-compatible storage for submission files
   - `plugins/paymethod/emspubstripe` — Stripe payment gateway integration
+  - `plugins/themes/emsDefaultManuscript` - Default theme for hosted journals
 - When designing UI for custom plugins, always use OJS's native Vue component library to maintain visual consistency and professional look. The components live at `lib/ui-library/src/components/` — use `PkpButton`, `PkpTable`, `ListPanel`, `FieldText`, `Modal`, `Badge`, `Spinner`, `Search`, `Pagination`, etc. for pages and forms. Compose plugin pages from these instead of hand-rolling HTML/CSS. This also ensures free accessibility, RTL support, and version-compatible styling.
 
 ## For git push
