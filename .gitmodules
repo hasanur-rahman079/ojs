@@ -1,6 +1,7 @@
 [submodule "lib/pkp"]
 	path = lib/pkp
-	url = https://github.com/pkp/pkp-lib.git
+	url = https://github.com/hasanur-rahman079/pkp-lib.git
+	branch = stable-3_5_0-ems
 [submodule "plugins/generic/customBlockManager"]
 	path = plugins/generic/customBlockManager
 	url = https://github.com/pkp/customBlockManager.git
@@ -28,7 +29,8 @@
 	url = https://github.com/pkp/reviewReport
 [submodule "lib/ui-library"]
 	path = lib/ui-library
-	url = https://github.com/pkp/ui-library
+	url = https://github.com/hasanur-rahman079/ui-library.git
+	branch = stable-3_5_0-ems
 [submodule "plugins/generic/citationStyleLanguage"]
 	path = plugins/generic/citationStyleLanguage
 	url = https://github.com/pkp/citationStyleLanguage.git
