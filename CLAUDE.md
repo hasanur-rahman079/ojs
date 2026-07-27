@@ -1,6 +1,6 @@
 This is the OJS3.5 from pkp. This is the git repo https://github.com/hasanur-rahman079/ojs/tree/stable-3_5_0
 
-I am using this as a managed hosted platform for multiple journal at my own hosting using dokploy. 
+I am using this as a managed hosted platform for multiple journal at my own hosting using dokploy. This will be the similar platform like ScholarOne, EJManager. 
 
 ## Things to remember
 
@@ -15,6 +15,8 @@ I am using this as a managed hosted platform for multiple journal at my own host
   - `plugins/themes/emsDefaultManuscript` - Default theme for hosted journals
 - When designing UI for custom plugins, always use OJS's native Vue component library to maintain visual consistency and professional look. The components live at `lib/ui-library/src/components/` — use `PkpButton`, `PkpTable`, `ListPanel`, `FieldText`, `Modal`, `Badge`, `Spinner`, `Search`, `Pagination`, etc. for pages and forms. Compose plugin pages from these instead of hand-rolling HTML/CSS. This also ensures free accessibility, RTL support, and version-compatible styling.
 
+- The designs should not be AI slop. you should use the Emil Kowalski, Impeccable and Taste skills for better design
+
 ## For git push
 
-ask before git add and commits and push. 
+- ask before git add and commits and push. 
