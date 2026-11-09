@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-12-24 10:41+0000\n"
-"Last-Translator: Pia Piontkowitz <pia.piontkowitz@rub.de>\n"
+"PO-Revision-Date: 2026-08-21 10:16+0000\n"
+"Last-Translator: Kristin Ameis <kristin.ameis@sub.uni-hamburg.de>\n"
 "Language-Team: German <http://translate.pkp.sfu.ca/projects/ojs/invitation/"
 "de/>\n"
 "Language: de\n"
@@ -26,6 +26,7 @@ msgstr "Details ansehen, um mit Ihrer neuen Rolle in OJS zu arbeiten"
 msgid "invitation.role.masthead"
 msgstr "Impressum der Zeitschrift"
 
+#, fuzzy
 msgid "invitation.wizard.pageTitleDescription"
 msgstr ""
 "Sie laden eine/n Benutzer/in dazu ein, eine Rolle in OJS anzunehmen, sowie "
@@ -51,17 +52,19 @@ msgstr ""
 msgid "acceptInvitation.modal.title"
 msgstr "Ihnen wurde eine neue Rolle in OJS zugewiesen"
 
+#, fuzzy
 msgid "acceptInvitation.verifyOrcid.stepDescription"
 msgstr ""
 "Sie können Ihre ORCID iD verifizieren oder diesen Schritt überspringen. "
 "Sollten Sie den Schritt jetzt überspringen, können Sie die iD später noch in "
 "Ihrem OJS-Profil verifzieren"
 
+#, fuzzy
 msgid "userInvitation.modal.message"
 msgstr ""
 "{$email} wurde eingeladen, eine neue Rolle in OJS anzunehmen. Sie können "
 "Updates zur Entscheidung des/der Benutzer/in auf der Benutzer/innen & Rollen-"
-"Seite, in Ihren OJS Benachrichtigungen, und/oder Ihren E-Mails einsehen."
+"Seite, in Ihren OJS Benachrichtigungen, und/oder Ihren E-Mails einsehen"
 
 msgid "userInvitation.roleTable.journalMasthead"
 msgstr "Impressum der Zeitschrift"
@@ -72,6 +75,7 @@ msgstr "Diese/r Benutzer/in ist bereits in dieser Zeitschrift vorhanden"
 msgid "userInvitation.search.userNotFound"
 msgstr "Diese/r Benutzer/in besitzt keine Rolle in dieser Zeitschrift"
 
+#, fuzzy
 msgid "userInvitation.searchUser.stepDescription"
 msgstr ""
 "Suchen Sie mit der E-Mail Adresse, Benutzer/innennamen oder der ORCID ID "
@@ -87,3 +91,7 @@ msgstr ""
 "Schicken Sie dem/der Benutzer/in eine E-Mail, um ihn/sie über die Einladung, "
 "die nächsten Schritte, die DSGVO-Richtlinien der Zeitschrift und die ORCID-"
 "Verifizierung zu informieren"
+
+msgid "invitation.orcid.acceptInvitation.message"
+msgstr ""
+"Nicht verifiziert. Sie können Ihre ORCID iD in Ihrem OJS-Profil verifizieren."

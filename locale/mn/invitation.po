@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-02-07 06:31+0000\n"
+"PO-Revision-Date: 2026-07-29 09:09+0000\n"
 "Last-Translator: Gantulga <cybermon@gmail.com>\n"
 "Language-Team: Mongolian <http://translate.pkp.sfu.ca/projects/ojs/"
 "invitation/mn/>\n"
@@ -45,16 +45,18 @@ msgid "acceptInvitation.modal.title"
 msgstr "Танд OJS системд шинэ үүрэг оноолоо"
 
 msgid "invitation.role.masthead"
-msgstr "Сэтгүүлийн бүрэлдэхүүн (Masthead)"
+msgstr "Сэтгүүлийн нэрийн товчлол (Masthead)"
 
+#, fuzzy
 msgid "invitation.wizard.pageTitleDescription"
 msgstr ""
-"Та хэрэглэгчийг OJS системд үүрэг гүйцэтгэх болон сэтгүүлийн бүрэлдэхүүнд "
+"Та хэрэглэгчийг OJS системд үүрэг гүйцэтгэх болон сэтгүүлийн нэрийн товчлол "
 "(masthead) нэрээ гаргахыг урьж байна"
 
 msgid "userInvitation.enterDetails.stepDescription"
 msgstr "Та тэднийг OJS системд үүрэг гүйцэтгэхийг урьж болно"
 
+#, fuzzy
 msgid "userInvitation.modal.message"
 msgstr ""
 "{$email} хаягт OJS системийн шинэ үүргийн урилга илгээлээ. Хэрэглэгчийн "
@@ -70,6 +72,7 @@ msgstr "Хэрэглэгч энэ сэтгүүлд аль хэдийн бүрт�
 msgid "userInvitation.search.userNotFound"
 msgstr "Энэ хэрэглэгч тус сэтгүүлд ямар нэгэн үүрэггүй байна"
 
+#, fuzzy
 msgid "userInvitation.searchUser.stepDescription"
 msgstr ""
 "Хэрэглэгчийг имэйл хаяг, нэвтрэх нэр эсвэл ORCID ID-аар нь хайна уу. "
@@ -78,8 +81,14 @@ msgstr ""
 "Хэрэв хэрэглэгч системд аль хэдийн бүртгэлтэй бол мэдээллийг нь үзэж, нэмэлт "
 "үүрэг гүйцэтгэхийг урьж болно."
 
+#, fuzzy
 msgid "acceptInvitation.verifyOrcid.stepDescription"
 msgstr ""
 "Та ORCID iD-гээ баталгаажуулах эсвэл алгасахаар сонгож болно. Хэрэв одоо "
 "алгасахаар сонговол дараа нь OJS систем дэх өөрийн профайл хэсгээс ORCID iD-"
 "гээ баталгаажуулах боломжтой"
+
+msgid "invitation.orcid.acceptInvitation.message"
+msgstr ""
+"Баталгаажаагүй байна. Та OJS дахь профайлын хэсгээс ORCID iD-гээ "
+"баталгаажуулж болно."
