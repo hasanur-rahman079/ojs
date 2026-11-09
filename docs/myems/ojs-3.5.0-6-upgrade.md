@@ -62,9 +62,9 @@ and three customized submodules: PKP core, UI library, and Crossref. Each
 merge retains the existing fork history and the official release history.
 Other changed bundled submodules are pinned to the official release commits.
 
-No commits have been pushed. GitHub's behind count will change only after
-the merge history is published. These local commits are not a completed
-deployment.
+The customized submodule merge commits must be published to their forks
+before publishing the OJS root commit. Publishing source code does not run
+the production database upgrade or the production spam-account cleanup.
 
 When recording the update, merge history must include both the existing fork
 HEAD and the official release commit for the root and customized submodules.

@@ -55,7 +55,7 @@ set_config() {
         esac
     fi
 
-    echo "  [+] Setting $key = $q_value in [$section]"
+    echo "  [+] Setting $key in [$section]"
     # Use ! as delimiter to handle paths/URLs safely
     sed -i "/^\[$section\]/,/^\[/ s|^;*[[:space:]]*$key[[:space:]]*=.*|$key = $q_value|" config.inc.php
 }
